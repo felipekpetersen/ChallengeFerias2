@@ -13,6 +13,15 @@
 		3206E05E23D3CDC400106A43 /* SearchMusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3206E05C23D3CDC400106A43 /* SearchMusicTableViewCell.xib */; };
 		3206E06023D3EA6800106A43 /* ScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3206E05F23D3EA6800106A43 /* ScrollViewExtension.swift */; };
 		3206E06323D538A200106A43 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3206E06223D538A200106A43 /* ConnectViewController.swift */; };
+		3206E06723D887AF00106A43 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3206E06523D887AE00106A43 /* FriendsViewController.swift */; };
+		3206E06823D887AF00106A43 /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3206E06623D887AE00106A43 /* FriendsViewController.xib */; };
+		3206E06A23D8928F00106A43 /* CIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3206E06923D8928F00106A43 /* CIImageExtension.swift */; };
+		3206E06C23D8945000106A43 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3206E06B23D8945000106A43 /* QRCodeGenerator.swift */; };
+		3206E07023D89ED700106A43 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3206E06E23D89ED700106A43 /* FriendTableViewCell.swift */; };
+		3206E07123D89ED700106A43 /* FriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3206E06F23D89ED700106A43 /* FriendTableViewCell.xib */; };
+		3206E07323D92C0600106A43 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3206E07223D92C0600106A43 /* ColorHelper.swift */; };
+		3206E07623DA1AB100106A43 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3206E07423DA1AB100106A43 /* PlaylistTableViewCell.swift */; };
+		3206E07723DA1AB100106A43 /* PlaylistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3206E07523DA1AB100106A43 /* PlaylistTableViewCell.xib */; };
 		322DD5AC2372094400821A6D /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322DD5AA2372094400821A6D /* PlayerViewController.swift */; };
 		322DD5AD2372094400821A6D /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 322DD5AB2372094400821A6D /* PlayerViewController.xib */; };
 		323984722373000300CDCCF7 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323984712373000300CDCCF7 /* RequestModel.swift */; };
@@ -33,6 +42,8 @@
 		32A8AD4E23D24CB7008B71CC /* ShareTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A8AD4C23D24CB7008B71CC /* ShareTableViewCell.xib */; };
 		32A8AD5123D256B5008B71CC /* ShareMusicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8AD4F23D256B5008B71CC /* ShareMusicCollectionViewCell.swift */; };
 		32A8AD5223D256B5008B71CC /* ShareMusicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A8AD5023D256B5008B71CC /* ShareMusicCollectionViewCell.xib */; };
+		32D60B9B23DA2AD1004F0C48 /* PlaylistMusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D60B9923DA2AD1004F0C48 /* PlaylistMusicTableViewCell.swift */; };
+		32D60B9C23DA2AD1004F0C48 /* PlaylistMusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32D60B9A23DA2AD1004F0C48 /* PlaylistMusicTableViewCell.xib */; };
 		541345A220D2A80300FD05F7 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541345A120D2A80300FD05F7 /* SpotifyiOS.framework */; };
 		54AC7EE020081243008CD692 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AC7EDF20081243008CD692 /* AppDelegate.swift */; };
 		54AC7EE220081243008CD692 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AC7EE120081243008CD692 /* ViewController.swift */; };
@@ -61,6 +72,15 @@
 		3206E05C23D3CDC400106A43 /* SearchMusicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchMusicTableViewCell.xib; sourceTree = "<group>"; };
 		3206E05F23D3EA6800106A43 /* ScrollViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewExtension.swift; sourceTree = "<group>"; };
 		3206E06223D538A200106A43 /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
+		3206E06523D887AE00106A43 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		3206E06623D887AE00106A43 /* FriendsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsViewController.xib; sourceTree = "<group>"; };
+		3206E06923D8928F00106A43 /* CIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIImageExtension.swift; sourceTree = "<group>"; };
+		3206E06B23D8945000106A43 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		3206E06E23D89ED700106A43 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		3206E06F23D89ED700106A43 /* FriendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendTableViewCell.xib; sourceTree = "<group>"; };
+		3206E07223D92C0600106A43 /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
+		3206E07423DA1AB100106A43 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
+		3206E07523DA1AB100106A43 /* PlaylistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistTableViewCell.xib; sourceTree = "<group>"; };
 		322DD5AA2372094400821A6D /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		322DD5AB2372094400821A6D /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		323984712373000300CDCCF7 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
@@ -81,6 +101,8 @@
 		32A8AD4C23D24CB7008B71CC /* ShareTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareTableViewCell.xib; sourceTree = "<group>"; };
 		32A8AD4F23D256B5008B71CC /* ShareMusicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMusicCollectionViewCell.swift; sourceTree = "<group>"; };
 		32A8AD5023D256B5008B71CC /* ShareMusicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareMusicCollectionViewCell.xib; sourceTree = "<group>"; };
+		32D60B9923DA2AD1004F0C48 /* PlaylistMusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistMusicTableViewCell.swift; sourceTree = "<group>"; };
+		32D60B9A23DA2AD1004F0C48 /* PlaylistMusicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistMusicTableViewCell.xib; sourceTree = "<group>"; };
 		5413459E20D1049200FD05F7 /* SPTLoginSampleAppSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SPTLoginSampleAppSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		541345A120D2A80300FD05F7 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = ../../SpotifyiOS.framework; sourceTree = "<group>"; };
 		54AC7EDC20081243008CD692 /* SPTLoginSampleAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPTLoginSampleAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +153,25 @@
 			path = ConnectViewController;
 			sourceTree = "<group>";
 		};
+		3206E06423D8878F00106A43 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				3206E06D23D89EB700106A43 /* Cells */,
+				3206E06523D887AE00106A43 /* FriendsViewController.swift */,
+				3206E06623D887AE00106A43 /* FriendsViewController.xib */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		3206E06D23D89EB700106A43 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3206E06E23D89ED700106A43 /* FriendTableViewCell.swift */,
+				3206E06F23D89ED700106A43 /* FriendTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		324A327B23D2B5C6005FCAB4 /* PlayerModal */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +184,7 @@
 		32A8AD3023CFCAA7008B71CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3206E06423D8878F00106A43 /* Friends */,
 				3206E06123D5388800106A43 /* ConnectViewController */,
 				3206E05523D3B57600106A43 /* ShareModal */,
 				324A327B23D2B5C6005FCAB4 /* PlayerModal */,
@@ -172,6 +214,10 @@
 				32A8AD4C23D24CB7008B71CC /* ShareTableViewCell.xib */,
 				32A8AD4F23D256B5008B71CC /* ShareMusicCollectionViewCell.swift */,
 				32A8AD5023D256B5008B71CC /* ShareMusicCollectionViewCell.xib */,
+				3206E07423DA1AB100106A43 /* PlaylistTableViewCell.swift */,
+				3206E07523DA1AB100106A43 /* PlaylistTableViewCell.xib */,
+				32D60B9923DA2AD1004F0C48 /* PlaylistMusicTableViewCell.swift */,
+				32D60B9A23DA2AD1004F0C48 /* PlaylistMusicTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -181,6 +227,9 @@
 			children = (
 				32A8AD3C23D22747008B71CC /* RoundedView.swift */,
 				3206E05F23D3EA6800106A43 /* ScrollViewExtension.swift */,
+				3206E06923D8928F00106A43 /* CIImageExtension.swift */,
+				3206E06B23D8945000106A43 /* QRCodeGenerator.swift */,
+				3206E07223D92C0600106A43 /* ColorHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -306,16 +355,20 @@
 				32A8AD4423D22A4D008B71CC /* SourceSansPro-Semibold.otf in Resources */,
 				54AC7EEA20081243008CD692 /* LaunchScreen.storyboard in Resources */,
 				32A8AD4623D22A4D008B71CC /* SourceSansPro-Regular.otf in Resources */,
+				3206E07123D89ED700106A43 /* FriendTableViewCell.xib in Resources */,
+				3206E06823D887AF00106A43 /* FriendsViewController.xib in Resources */,
 				3206E05923D3B58700106A43 /* ShareModalViewController.xib in Resources */,
 				32A8AD4523D22A4D008B71CC /* SourceSansPro-Light.otf in Resources */,
 				54AC7EE720081243008CD692 /* Assets.xcassets in Resources */,
 				324A327F23D2B60C005FCAB4 /* PlayerModalViewController.xib in Resources */,
 				322DD5AD2372094400821A6D /* PlayerViewController.xib in Resources */,
+				3206E07723DA1AB100106A43 /* PlaylistTableViewCell.xib in Resources */,
 				32A8AD3523CFCAC9008B71CC /* HomeViewController.xib in Resources */,
 				32A8AD4323D22A4D008B71CC /* SourceSansPro-Bold.otf in Resources */,
 				32A8AD3A23CFCB77008B71CC /* MusicTableViewCell.xib in Resources */,
 				3206E05E23D3CDC400106A43 /* SearchMusicTableViewCell.xib in Resources */,
 				32A8AD4A23D233D3008B71CC /* GenderCollectionViewCell.xib in Resources */,
+				32D60B9C23DA2AD1004F0C48 /* PlaylistMusicTableViewCell.xib in Resources */,
 				32A8AD4E23D24CB7008B71CC /* ShareTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,17 +384,24 @@
 				323984722373000300CDCCF7 /* RequestModel.swift in Sources */,
 				54BDA67A200E8A74005E72F1 /* ConnectButton.swift in Sources */,
 				322DD5AC2372094400821A6D /* PlayerViewController.swift in Sources */,
+				3206E06C23D8945000106A43 /* QRCodeGenerator.swift in Sources */,
+				3206E06723D887AF00106A43 /* FriendsViewController.swift in Sources */,
+				3206E06A23D8928F00106A43 /* CIImageExtension.swift in Sources */,
+				3206E07023D89ED700106A43 /* FriendTableViewCell.swift in Sources */,
 				3206E06023D3EA6800106A43 /* ScrollViewExtension.swift in Sources */,
 				54AC7EE220081243008CD692 /* ViewController.swift in Sources */,
 				3206E05D23D3CDC400106A43 /* SearchMusicTableViewCell.swift in Sources */,
 				32A8AD4923D233D3008B71CC /* GenderCollectionViewCell.swift in Sources */,
+				32D60B9B23DA2AD1004F0C48 /* PlaylistMusicTableViewCell.swift in Sources */,
 				32A8AD3923CFCB77008B71CC /* MusicTableViewCell.swift in Sources */,
+				3206E07623DA1AB100106A43 /* PlaylistTableViewCell.swift in Sources */,
 				3206E05823D3B58700106A43 /* ShareModalViewController.swift in Sources */,
 				324A327E23D2B60C005FCAB4 /* PlayerModalViewController.swift in Sources */,
 				54AC7EE020081243008CD692 /* AppDelegate.swift in Sources */,
 				32A8AD3423CFCAC9008B71CC /* HomeViewController.swift in Sources */,
 				32A8AD5123D256B5008B71CC /* ShareMusicCollectionViewCell.swift in Sources */,
 				32A8AD4D23D24CB7008B71CC /* ShareTableViewCell.swift in Sources */,
+				3206E07323D92C0600106A43 /* ColorHelper.swift in Sources */,
 				3206E06323D538A200106A43 /* ConnectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -4,12 +4,12 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
 
 //    fileprivate let SpotifyClientID = "9a41d6d229754090b8cd983dacfc89e7"
 //    fileprivate let SpotifyRedirectURI = URL(string: "spotify-login-sdk-test-app://spotify-login-callback")!
-    let SpotifyClientID = "9a41d6d229754090b8cd983dacfc89e7"
-    let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
+    static let SpotifyClientID = "9a41d6d229754090b8cd983dacfc89e7"
+    static let SpotifyRedirectURI = URL(string: "syncs-login://callback")!
     
-    lazy var configuration = SPTConfiguration(
+    var configuration = SPTConfiguration(
         clientID: SpotifyClientID,
-        redirectURL: SpotifyRedirectURL
+        redirectURL: SpotifyRedirectURI
     )
     
     lazy var sessionManager: SPTSessionManager = {
@@ -18,8 +18,11 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
             self.configuration.tokenSwapURL = tokenSwapURL
             self.configuration.tokenRefreshURL = tokenRefreshURL
             self.configuration.playURI = ""
+        } else {
+            fatalError("Não rolou")
         }
         let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
+        manager.delegate = self
         return manager
     }()
 //    lazy var configuration: SPTConfiguration = {
@@ -157,22 +160,24 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
     }
 
     func updateViewBasedOnConnected() {
-        if (appRemote.isConnected) {
-            connectButton.isHidden = true
-            disconnectButton.isHidden = false
-            connectLabel.isHidden = true
-            imageView.isHidden = false
-            trackLabel.isHidden = false
-            pauseAndPlayButton.isHidden = false
-            nextButton.isHidden = false
-        } else {
-            disconnectButton.isHidden = true
-            connectButton.isHidden = false
-            connectLabel.isHidden = false
-            imageView.isHidden = true
-            trackLabel.isHidden = true
-            pauseAndPlayButton.isHidden = true
-            nextButton.isHidden = true
+        DispatchQueue.main.async {
+            if (self.appRemote.isConnected) {
+                self.connectButton.isHidden = true
+                self.disconnectButton.isHidden = false
+                self.connectLabel.isHidden = true
+                self.imageView.isHidden = false
+                self.trackLabel.isHidden = false
+                self.pauseAndPlayButton.isHidden = false
+                self.nextButton.isHidden = false
+            } else {
+                self.disconnectButton.isHidden = true
+                self.connectButton.isHidden = false
+                self.connectLabel.isHidden = false
+                self.imageView.isHidden = true
+                self.trackLabel.isHidden = true
+                self.pauseAndPlayButton.isHidden = true
+                self.nextButton.isHidden = true
+            }
         }
     }
 
@@ -208,7 +213,6 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
     
     @objc func didTapNext(_ button: UIButton) {
         appRemote.playerAPI?.skip(toNext: .none)
-        
     }
 
     @objc func didTapDisconnect(_ button: UIButton) {
@@ -224,14 +228,12 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
          permissions the user is asked to grant.
          For more information, see https://developer.spotify.com/web-api/using-scopes/.
          */
-        let scope: SPTScope = [.appRemoteControl, .playlistReadPrivate, .userFollowRead]
         if self.appRemote.isConnected {
-            print("conectado")
-        }
-        if UserDefaults.standard.string(forKey: "token") == nil {
-            connect()
-        } else {
             getAccessToken()
+            print("AccessToken")
+        } else {
+            connect()
+            print("Connect")
         }
         
 //            sessionManager,
@@ -239,17 +241,16 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
     }
     
     func connect() {
-        let scope: SPTScope = [.appRemoteControl, .playlistReadPrivate, .userFollowRead]
+        let scope: SPTScope = [.appRemoteControl, .playlistModifyPublic, .playlistReadCollaborative, .playlistReadPrivate, .playlistModifyPrivate, .userFollowRead]
         if #available(iOS 11, *) {
-            self.sessionManager.initiateSession(with: scope, options: .clientOnly)
+            self.sessionManager.initiateSession(with: scope, options: .default)
         } else {
-            self.sessionManager.initiateSession(with: scope, options: .clientOnly, presenting: self)
+            self.sessionManager.initiateSession(with: scope, options: .default, presenting: self)
         }
     }
     
     func getAccessToken() {
         UserRequest().refreshToken { (success, error) in
-            print(success)
             if let accessToken = success?["access_token"] as? String {
                 self.appRemote.connectionParameters.accessToken = accessToken
                 self.appRemote.connect()
@@ -258,35 +259,38 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
             }
         }
         updateViewBasedOnConnected()
-
     }
 
 
     // MARK: - SPTSessionManagerDelegate
 
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
+        updateViewBasedOnConnected()
         presentAlertController(title: "Authorization Failed", message: error.localizedDescription, buttonTitle: "Bummer")
     }
 
     func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
+        updateViewBasedOnConnected()
+//        enterApp()
         presentAlertController(title: "Session Renewed", message: session.description, buttonTitle: "Sweet")
     }
 
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
+//        enterApp()
         print("conectou nessa budega")
         appRemote.connectionParameters.accessToken = session.accessToken
-        UserDefaults.standard.set(session.refreshToken, forKey: "token")
-//        UserDefaults.standard.set(session, forKey: "session")
         appRemote.connect()
     }
     
     func enterApp() {
-        let nav1 = UINavigationController()
-        nav1.navigationBar.barTintColor = UIColor(red: 41.0 / 255.0, green: 41.0 / 255.0, blue: 41.0 / 255.0, alpha: 1.0)
-        nav1.navigationBar.tintColor = .white
-        let mainView = HomeViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
-        nav1.viewControllers = [mainView]
-        self.present(nav1, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let nav1 = UINavigationController()
+            nav1.navigationBar.barTintColor = UIColor(red: 41.0 / 255.0, green: 41.0 / 255.0, blue: 41.0 / 255.0, alpha: 1.0)
+            nav1.navigationBar.tintColor = .white
+            let mainView = HomeViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
+            nav1.viewControllers = [mainView]
+            UIApplication.shared.keyWindow?.rootViewController = nav1
+        }
     }
 
     // MARK: - SPTAppRemoteDelegate
@@ -297,8 +301,8 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
         appRemote.playerAPI?.subscribe(toPlayerState: { (success, error) in
             if let error = error {
                 print("Error subscribing to player state:" + error.localizedDescription)
-            } else {
-                self.enterApp()
+//            } else {
+//                self.enterApp()
             }
         })
         enterApp()
@@ -325,10 +329,13 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
     // MARK: - Private Helpers
 
     fileprivate func presentAlertController(title: String, message: String, buttonTitle: String) {
+        DispatchQueue.main.async {
         let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: buttonTitle, style: .default, handler: nil)
         controller.addAction(action)
-        present(controller, animated: true)
+            self.present(controller, animated: true)
+        }
+        
     }
 }
 

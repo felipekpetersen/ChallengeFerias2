@@ -10,6 +10,7 @@ import UIKit
 
 class PlayerModalViewController: UIViewController {
     
+    @IBOutlet weak var outsideView: UIView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var degradeView: UIView!
     @IBOutlet weak var musicNameLabel: UILabel!
@@ -41,6 +42,14 @@ class PlayerModalViewController: UIViewController {
     @IBAction func didTapNextButton(_ sender: Any) {
     }
     
+    func setupViewTap() {
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(didTapDismiss))
+        self.outsideView.addGestureRecognizer(dismissTap)
+    }
+    
+    @objc func didTapDismiss() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 class Colors {

@@ -33,3 +33,17 @@ class RoundedView: UIView{
         }
     }
 }
+
+extension UIView {
+    
+    func setRadiusToSpecificCorner(corners: UIRectCorner, radius: CGFloat) {
+        let rectShape = CAShapeLayer()
+        rectShape.bounds = self.frame
+        rectShape.position = self.center
+        rectShape.path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius)).cgPath
+
+//         self.layer.backgroundColor = UIColor.green.cgColor
+        //Here I'm masking the textView's layer with rectShape layer
+         self.layer.mask = rectShape
+    }
+}

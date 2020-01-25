@@ -23,6 +23,7 @@
                 <outlet property="modalHeight" destination="Smu-18-NSh" id="64c-Ko-Vmm"/>
                 <outlet property="musicNameLabel" destination="b9F-Q1-n0z" id="aUe-se-ZRU"/>
                 <outlet property="musicView" destination="5St-kz-uS0" id="0nG-D9-4ki"/>
+                <outlet property="outsideView" destination="dd6-OQ-eBH" id="0SH-KW-QZt"/>
                 <outlet property="searchBar" destination="daW-6d-iah" id="u3Z-j8-DvZ"/>
                 <outlet property="shareView" destination="l2o-bB-YJo" id="dws-9U-CqM"/>
                 <outlet property="tableView" destination="m2l-a3-cLJ" id="39t-lX-sME"/>
@@ -34,6 +35,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dd6-OQ-eBH">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Bt-vu-lg9" customClass="RoundedView" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="536" width="414" height="360"/>
                     <subviews>
@@ -168,12 +173,31 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXf-VY-CYB" customClass="RoundedView" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+                    <rect key="frame" x="182" y="522" width="50" height="6"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.36078431370000003" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="HAJ-bf-x3y"/>
+                        <constraint firstAttribute="height" constant="6" id="QlX-Tz-CTc"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.058823529411764705" green="0.058823529411764705" blue="0.058823529411764705" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="1Bt-vu-lg9" secondAttribute="trailing" id="3kg-CW-uKT"/>
+                <constraint firstItem="dd6-OQ-eBH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="L6R-R6-7oQ"/>
                 <constraint firstItem="1Bt-vu-lg9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZAI-4y-39H"/>
+                <constraint firstItem="kXf-VY-CYB" firstAttribute="top" secondItem="dd6-OQ-eBH" secondAttribute="bottom" constant="-340" id="ar3-eK-ih1"/>
+                <constraint firstItem="dd6-OQ-eBH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="cjR-wc-735"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dd6-OQ-eBH" secondAttribute="trailing" id="jhG-OP-2BL"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1Bt-vu-lg9" secondAttribute="bottom" constant="-34" id="k34-MH-bk1"/>
+                <constraint firstItem="kXf-VY-CYB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qUa-Nt-WLc"/>
+                <constraint firstItem="1Bt-vu-lg9" firstAttribute="top" secondItem="kXf-VY-CYB" secondAttribute="bottom" constant="8" id="rVs-B7-Gei"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="120.53571428571428"/>

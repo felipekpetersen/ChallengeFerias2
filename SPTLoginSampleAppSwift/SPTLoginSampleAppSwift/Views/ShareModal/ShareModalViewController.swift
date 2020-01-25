@@ -15,6 +15,8 @@ enum ShareModalViewControllerState {
 
 class ShareModalViewController: UIViewController {
     
+    
+    @IBOutlet weak var outsideView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var musicNameLabel: UILabel!
@@ -49,11 +51,17 @@ class ShareModalViewController: UIViewController {
     
     func setupViewTap() {
         let shareTap = UITapGestureRecognizer(target: self, action: #selector(didTapShare))
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(didTapDismiss))
         self.shareView.addGestureRecognizer(shareTap)
+        self.outsideView.addGestureRecognizer(dismissTap)
     }
     
     @objc func didTapShare() {
         
+    }
+    
+    @objc func didTapDismiss() {
+         self.dismiss(animated: true, completion: nil)
     }
     
     func setupViewState() {

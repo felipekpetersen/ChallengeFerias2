@@ -12,6 +12,11 @@ protocol ShareTableViewCellDelegate {
     func didTapItem(state: ShareModalViewControllerState)
 }
 
+enum SelectedSharedType {
+    case playlist
+    case music
+}
+
 class ShareTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -21,6 +26,7 @@ class ShareTableViewCell: UITableViewCell {
     
     let MUSIC_CELL = "ShareMusicCollectionViewCell"
     var delegate: ShareTableViewCellDelegate?
+    var selectedType: SelectedSharedType = .music
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,8 +41,8 @@ class ShareTableViewCell: UITableViewCell {
     }
     
     func setupViewTap() {
-        let musicTap = UITapGestureRecognizer(target: self, action: #selector(didTapMusicView))
-        let playlistTap = UITapGestureRecognizer(target: self, action: #selector(didTapPlaylistView))
+        let musicTap = UITapGestureRecognizer(target: self, action: #selector(didTapMusicView(_:)))
+        let playlistTap = UITapGestureRecognizer(target: self, action: #selector(didTapPlaylistView(_:)))
         let searchTap = UITapGestureRecognizer(target: self, action: #selector(didTapSearchView))
         
         self.musicView.addGestureRecognizer(musicTap)
@@ -44,12 +50,19 @@ class ShareTableViewCell: UITableViewCell {
         self.searchView.addGestureRecognizer(searchTap)
     }
     
-    @objc func didTapMusicView() {
-        
+    @objc func didTapMusicView(_ sender: UITapGestureRecognizer? = nil) {
+        setupSelected(sender: sender)
     }
     
-    @objc func didTapPlaylistView() {
-        
+    @objc func didTapPlaylistView(_ sender: UITapGestureRecognizer? = nil) {
+        setupSelected(sender: sender)
+    }
+    
+    func setupSelected(sender: UITapGestureRecognizer?) {
+        self.musicView.backgroundColor = UIColor().hexStringToUIColor(hex: "#4a4a4a")
+        self.playlistView.backgroundColor = UIColor().hexStringToUIColor(hex: "#4a4a4a")
+        sender?.view?.backgroundColor = .red
+        self.selectedType = sender?.view == musicView ? .music : .playlist
     }
     
     @objc func didTapSearchView() {

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceSansPro-Regular.otf">
+            <string>SourceSansPro-Regular</string>
+        </array>
+        <array key="SourceSansPro-Semibold.otf">
+            <string>SourceSansPro-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="93" id="KGk-i7-Jjw" customClass="PlaylistMusicTableViewCell" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYd-Qr-AOS" customClass="RoundedView" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+                        <rect key="frame" x="16" y="8" width="20" height="20"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="z60-01-i8i">
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="z60-01-i8i" secondAttribute="bottom" id="9LX-cr-2qM"/>
+                            <constraint firstAttribute="width" constant="20" id="AHA-px-ZUk"/>
+                            <constraint firstAttribute="height" constant="20" id="NBf-Dz-KJu"/>
+                            <constraint firstItem="z60-01-i8i" firstAttribute="top" secondItem="XYd-Qr-AOS" secondAttribute="top" id="h6t-Dr-f1M"/>
+                            <constraint firstAttribute="trailing" secondItem="z60-01-i8i" secondAttribute="trailing" id="nuN-kb-SWH"/>
+                            <constraint firstItem="z60-01-i8i" firstAttribute="leading" secondItem="XYd-Qr-AOS" secondAttribute="leading" id="xOQ-Fe-K27"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.36078431370000003" green="0.36078431370000003" blue="0.36078431370000003" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azf-BL-jco">
+                        <rect key="frame" x="279" y="13" width="25" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="tNL-Le-U5D"/>
+                            <constraint firstAttribute="width" constant="25" id="uLo-Ig-Ajq"/>
+                        </constraints>
+                        <state key="normal" image="dotsLight"/>
+                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="eQd-NM-6Il">
+                        <rect key="frame" x="44" y="12" width="57.5" height="12"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbh-BH-fbv">
+                                <rect key="frame" x="0.0" y="0.0" width="26" height="12"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Elc-kf-WJb">
+                                <rect key="frame" x="32" y="0.0" width="25.5" height="12"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="9"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="mbh-BH-fbv" firstAttribute="centerY" secondItem="eQd-NM-6Il" secondAttribute="centerY" id="xZu-vo-M9T"/>
+                            <constraint firstItem="Elc-kf-WJb" firstAttribute="centerY" secondItem="eQd-NM-6Il" secondAttribute="centerY" id="yLq-8p-dDa"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" red="0.36078431370000003" green="0.36078431370000003" blue="0.36078431370000003" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="XYd-Qr-AOS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="1zz-nG-EZE"/>
+                    <constraint firstItem="azf-BL-jco" firstAttribute="centerY" secondItem="z60-01-i8i" secondAttribute="centerY" id="CTW-j2-na4"/>
+                    <constraint firstItem="eQd-NM-6Il" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="CWT-Ze-mev"/>
+                    <constraint firstAttribute="bottom" secondItem="XYd-Qr-AOS" secondAttribute="bottom" constant="8" id="VCg-66-KPz"/>
+                    <constraint firstItem="mbh-BH-fbv" firstAttribute="centerY" secondItem="z60-01-i8i" secondAttribute="centerY" id="bxk-9F-MKa"/>
+                    <constraint firstItem="XYd-Qr-AOS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="dkr-My-zXe"/>
+                    <constraint firstAttribute="trailing" secondItem="azf-BL-jco" secondAttribute="trailing" constant="16" id="edx-ab-bkW"/>
+                    <constraint firstItem="eQd-NM-6Il" firstAttribute="leading" secondItem="XYd-Qr-AOS" secondAttribute="trailing" constant="8" id="iE9-iw-Apb"/>
+                    <constraint firstItem="Elc-kf-WJb" firstAttribute="centerY" secondItem="z60-01-i8i" secondAttribute="centerY" id="vBd-LE-QhM"/>
+                    <constraint firstItem="XYd-Qr-AOS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ywh-43-RXB"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="137.68115942028987" y="117.52232142857142"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="dotsLight" width="13" height="3"/>
+        <image name="placeholder" width="1290" height="1282"/>
+    </resources>
+</document>
