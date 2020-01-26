@@ -27,6 +27,8 @@ class PlaylistTableViewCell: UITableViewCell {
     let MUSIC_CELL = "PlaylistMusicTableViewCell"
     var delegate: PlaylistTableViewCellDelegate?
     var indexPath: IndexPath?
+    var height:CGFloat?
+    var isOpen = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,20 +36,21 @@ class PlaylistTableViewCell: UITableViewCell {
         setupTableView()
         setupCorner()
         setupViewTaps()
+
     }
     
-    func setup(indexPath: IndexPath) {
+    func setup(indexPath: IndexPath, height: CGFloat, isOpen: Bool) {
+        self.height = height
         self.indexPath = indexPath
+        self.isOpen = isOpen
+        setupConstraints()
     }
     
     override func layoutSubviews() {
         self.setupConstraints()
-        self.musicTableView.layoutIfNeeded()
-        self.musicTableView.setNeedsDisplay()
-        self.playlistView.setNeedsDisplay()
-        self.playlistView.layoutIfNeeded()
-        self.playlistView.needsUpdateConstraints()
-        self.musicTableView.reloadData()
+//        self.setupConstraints()
+//        self.playlistView.needsUpdateConstraints()
+//        self.musicTableView.reloadData()
     }
     
     func setupTableView() {
@@ -66,13 +69,25 @@ class PlaylistTableViewCell: UITableViewCell {
     }
     
     func setupConstraints() {
-        self.musicTableViewHeightConstraint.constant = 300
+        if isOpen {
+        self.musicTableViewHeightConstraint.constant = height ?? 0
+        self.playlistView.needsUpdateConstraints()
+        self.musicTableView.needsUpdateConstraints()
+        self.musicTableView.layoutIfNeeded()
+        self.musicTableView.setNeedsDisplay()
+        self.playlistView.setNeedsDisplay()
+        self.playlistView.layoutIfNeeded()
+        self.contentView.setNeedsDisplay()
+        self.contentView.layoutIfNeeded()
+        } else {
+            self.musicTableViewHeightConstraint.constant = 0
+        }
     }
     
     @objc func didTapPlaylist() {
 //        UIView.animate(withDuration: 1) {
         delegate?.didTapPlaylist(indexPath: indexPath ?? IndexPath(row: 0, section: 0))
-//        self.setupConstraints()
+        self.setupConstraints()
 //        self.musicTableView.reloadData()
 //        }
     }
@@ -83,6 +98,10 @@ extension PlaylistTableViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 36
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

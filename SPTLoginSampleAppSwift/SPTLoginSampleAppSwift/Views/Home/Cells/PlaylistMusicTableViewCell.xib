@@ -82,17 +82,27 @@
                             <constraint firstItem="Elc-kf-WJb" firstAttribute="centerY" secondItem="eQd-NM-6Il" secondAttribute="centerY" id="yLq-8p-dDa"/>
                         </constraints>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BcU-0N-QIO">
+                        <rect key="frame" x="0.0" y="35" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.36078431370000003" green="0.36078431370000003" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="JEO-ns-ljv"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.36078431370000003" green="0.36078431370000003" blue="0.36078431370000003" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="XYd-Qr-AOS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="1zz-nG-EZE"/>
                     <constraint firstItem="azf-BL-jco" firstAttribute="centerY" secondItem="z60-01-i8i" secondAttribute="centerY" id="CTW-j2-na4"/>
                     <constraint firstItem="eQd-NM-6Il" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="CWT-Ze-mev"/>
+                    <constraint firstItem="BcU-0N-QIO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="UGw-N5-g5R"/>
                     <constraint firstAttribute="bottom" secondItem="XYd-Qr-AOS" secondAttribute="bottom" constant="8" id="VCg-66-KPz"/>
+                    <constraint firstItem="BcU-0N-QIO" firstAttribute="top" secondItem="XYd-Qr-AOS" secondAttribute="bottom" constant="7" id="Xyn-dv-xxK"/>
                     <constraint firstItem="mbh-BH-fbv" firstAttribute="centerY" secondItem="z60-01-i8i" secondAttribute="centerY" id="bxk-9F-MKa"/>
                     <constraint firstItem="XYd-Qr-AOS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="dkr-My-zXe"/>
                     <constraint firstAttribute="trailing" secondItem="azf-BL-jco" secondAttribute="trailing" constant="16" id="edx-ab-bkW"/>
                     <constraint firstItem="eQd-NM-6Il" firstAttribute="leading" secondItem="XYd-Qr-AOS" secondAttribute="trailing" constant="8" id="iE9-iw-Apb"/>
+                    <constraint firstAttribute="trailing" secondItem="BcU-0N-QIO" secondAttribute="trailing" id="url-ui-9S6"/>
                     <constraint firstItem="Elc-kf-WJb" firstAttribute="centerY" secondItem="z60-01-i8i" secondAttribute="centerY" id="vBd-LE-QhM"/>
                     <constraint firstItem="XYd-Qr-AOS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ywh-43-RXB"/>
                 </constraints>

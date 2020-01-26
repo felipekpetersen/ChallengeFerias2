@@ -17,6 +17,9 @@ class HomeViewController: UIViewController {
     let MUSIC_CELL = "MusicTableViewCell"
     let PLAYLIST_CELL = "PlaylistTableViewCell"
     let SHARE_CELL = "ShareTableViewCell"
+    static let numberOfCellsPlaylist = 10
+    lazy var fixHeight: CGFloat = CGFloat(140 + HomeViewController.numberOfCellsPlaylist * 36)
+    var openedRow: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,29 +84,32 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
-//    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 0 {
-//            return 200
-//        } else {
-//            return 300
-//        }
-//    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 150
+        } else if let openedRow = openedRow, indexPath == openedRow {
+            return fixHeight
+        } else {
+            return 140
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let shareCell = self.postTableView.dequeueReusableCell(withIdentifier: SHARE_CELL, for: indexPath) as! ShareTableViewCell
-        let playlistCell = self.postTableView.dequeueReusableCell(withIdentifier: PLAYLIST_CELL, for: indexPath) as! PlaylistTableViewCell
-        playlistCell.delegate = self
-        playlistCell.setup(indexPath: indexPath)
-//        playlistCell.layoutSubviews()
-//        playlistCell.layoutIfNeeded()
-        playlistCell.selectionStyle = .none
-        shareCell.delegate = self
         if indexPath.row == 0 {
+            let shareCell = self.postTableView.dequeueReusableCell(withIdentifier: SHARE_CELL, for: indexPath) as! ShareTableViewCell
+            shareCell.delegate = self
             return shareCell
+        } else {
+            let playlistCell = self.postTableView.dequeueReusableCell(withIdentifier: PLAYLIST_CELL, for: indexPath) as! PlaylistTableViewCell
+            playlistCell.delegate = self
+            playlistCell.setup(indexPath: indexPath, height: fixHeight, isOpen: self.openedRow == indexPath)
+            //        playlistCell.layoutSubviews()
+            //        playlistCell.layoutIfNeeded()
+            playlistCell.selectionStyle = .none
+            return playlistCell
         }
 //        let musicCell = self.postTableView.dequeueReusableCell(withIdentifier: MUSIC_CELL, for: indexPath) as! MusicTableViewCell
-        return playlistCell
     }
 }
 
@@ -118,8 +124,12 @@ extension HomeViewController: ShareTableViewCellDelegate {
 
 extension HomeViewController: PlaylistTableViewCellDelegate {
     func didTapPlaylist(indexPath: IndexPath) {
+        if self.openedRow == indexPath {
+            openedRow = nil
+        } else {
+            self.openedRow = indexPath
+        }
         self.postTableView.reloadRows(at: [indexPath], with: .fade)
+        self.postTableView.reloadData()
     }
-    
-    
 }

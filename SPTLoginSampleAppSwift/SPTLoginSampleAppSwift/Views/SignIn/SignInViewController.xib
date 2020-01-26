@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Mattilda.otf">
+            <string>Mattilda</string>
+        </array>
+        <array key="SourceSansPro-Semibold.otf">
+            <string>SourceSansPro-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignInViewController" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+            <connections>
+                <outlet property="connectView" destination="pKR-j5-231" id="Y5Q-6Q-BIr"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKR-j5-231" customClass="RoundedView" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+                    <rect key="frame" x="32" y="753" width="350" height="45"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect with Spotify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idg-CF-sM2">
+                            <rect key="frame" x="85.5" y="10" width="179.5" height="25.5"/>
+                            <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.11764705882352941" green="0.84313725490196079" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="idg-CF-sM2" firstAttribute="centerX" secondItem="pKR-j5-231" secondAttribute="centerX" id="cZN-Pc-gwX"/>
+                        <constraint firstItem="idg-CF-sM2" firstAttribute="centerY" secondItem="pKR-j5-231" secondAttribute="centerY" id="cev-a7-vTu"/>
+                        <constraint firstAttribute="height" constant="45" id="mY1-0y-Rnw"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Syncs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbc-yI-6WB">
+                    <rect key="frame" x="144.5" y="104" width="125" height="72"/>
+                    <fontDescription key="fontDescription" name="Mattilda" family="Mattilda" pointSize="60"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="stz-X1-Khd">
+                    <rect key="frame" x="-4" y="220" width="426" height="300"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="WOZ-Ly-Xin"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Vbc-yI-6WB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="4uK-ea-YBe"/>
+                <constraint firstItem="pKR-j5-231" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="Jeo-uZ-tT7"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pKR-j5-231" secondAttribute="bottom" constant="64" id="Lky-n6-yad"/>
+                <constraint firstItem="Vbc-yI-6WB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UX4-og-VDv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="stz-X1-Khd" secondAttribute="trailing" constant="-8" id="kav-FS-IFZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pKR-j5-231" secondAttribute="trailing" constant="32" id="qQy-Aj-lGX"/>
+                <constraint firstItem="stz-X1-Khd" firstAttribute="top" secondItem="Vbc-yI-6WB" secondAttribute="bottom" constant="44" id="ucf-qH-ftl"/>
+                <constraint firstItem="stz-X1-Khd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="-4" id="y4b-2u-iMW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="125"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo" width="960" height="566"/>
+    </resources>
+</document>

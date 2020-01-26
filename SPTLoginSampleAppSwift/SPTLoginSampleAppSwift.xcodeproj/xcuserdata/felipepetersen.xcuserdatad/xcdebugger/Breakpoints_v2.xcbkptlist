@@ -100,36 +100,68 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - b150aee56d6bc3ad"
+                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - 6c189140c4baacb4"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "SPTLoginSampleAppSwift.ConnectViewController.appRemoteDidEstablishConnection(__C.SPTAppRemote) -&gt; ()"
                   moduleName = "SPTLoginSampleAppSwift"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/felipepetersen/Desktop/ios-sdk-master/DemoProjects/SPTLoginSampleAppSwift/SPTLoginSampleAppSwift/Views/ConnectViewController/ConnectViewController.swift"
+                  urlString = "file:///Users/felipepetersen/Desktop/Academy/Projetos/ChallengeFerias2/SPTLoginSampleAppSwift/SPTLoginSampleAppSwift/Views/ConnectViewController/ConnectViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "234"
                   endingLineNumber = "234"
-                  offsetFromSymbolStart = "272">
+                  offsetFromSymbolStart = "252">
                </Location>
                <Location
-                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - 71d66e16b16a5192"
+                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - ac9e51b318bb3e8b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SPTLoginSampleAppSwift.ConnectViewController.appRemoteDidEstablishConnection(__C.SPTAppRemote) -&gt; ()"
                   moduleName = "SPTLoginSampleAppSwift"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/felipepetersen/Desktop/ios-sdk-master/DemoProjects/SPTLoginSampleAppSwift/SPTLoginSampleAppSwift/Views/ConnectViewController/ConnectViewController.swift"
+                  urlString = "file:///Users/felipepetersen/Desktop/Academy/Projetos/ChallengeFerias2/SPTLoginSampleAppSwift/SPTLoginSampleAppSwift/Views/ConnectViewController/ConnectViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "235"
                   endingLineNumber = "235"
-                  offsetFromSymbolStart = "128">
+                  offsetFromSymbolStart = "106">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "837BB6F3-4F12-4298-8CCF-13106D9AB657"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SPTLoginSampleAppSwift/Views/Home/Cells/PlaylistTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "setupConstraints()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A225A81D-0234-4B1F-B165-7EDB33020306"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SPTLoginSampleAppSwift/Views/Home/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "tableView(_:heightForRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
