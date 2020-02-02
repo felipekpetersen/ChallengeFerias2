@@ -1,30 +1,30 @@
 import UIKit
 
-class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
+class ViewController: UIViewController {
 
 //    fileprivate let SpotifyClientID = "9a41d6d229754090b8cd983dacfc89e7"
 //    fileprivate let SpotifyRedirectURI = URL(string: "spotify-login-sdk-test-app://spotify-login-callback")!
-    static let SpotifyClientID = "9a41d6d229754090b8cd983dacfc89e7"
-    static let SpotifyRedirectURI = URL(string: "syncs-login://callback")!
-    
-    var configuration = SPTConfiguration(
-        clientID: SpotifyClientID,
-        redirectURL: SpotifyRedirectURI
-    )
-    
-    lazy var sessionManager: SPTSessionManager = {
-        if let tokenSwapURL = URL(string: "http://fepetersenspotify.herokuapp.com/api/token"),
-           let tokenRefreshURL = URL(string: "http://fepetersenspotify.herokuapp.com/api/refresh_token") {
-            self.configuration.tokenSwapURL = tokenSwapURL
-            self.configuration.tokenRefreshURL = tokenRefreshURL
-            self.configuration.playURI = ""
-        } else {
-            fatalError("Não rolou")
-        }
-        let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
-        manager.delegate = self
-        return manager
-    }()
+//    static let SpotifyClientID = "9a41d6d229754090b8cd983dacfc89e7"
+//    static let SpotifyRedirectURI = URL(string: "syncs-login://callback")!
+//
+//    var configuration = SPTConfiguration(
+//        clientID: SpotifyClientID,
+//        redirectURL: SpotifyRedirectURI
+//    )
+//
+//    lazy var sessionManager: SPTSessionManager = {
+//        if let tokenSwapURL = URL(string: "http://fepetersenspotify.herokuapp.com/api/token"),
+//           let tokenRefreshURL = URL(string: "http://fepetersenspotify.herokuapp.com/api/refresh_token") {
+//            self.configuration.tokenSwapURL = tokenSwapURL
+//            self.configuration.tokenRefreshURL = tokenRefreshURL
+//            self.configuration.playURI = ""
+//        } else {
+//            fatalError("Não rolou")
+//        }
+//        let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
+//        manager.delegate = self
+//        return manager
+//    }()
 //    lazy var configuration: SPTConfiguration = {
 //        let configuration = SPTConfiguration(clientID: SpotifyClientID, redirectURL: SpotifyRedirectURL)
 //        // Set the playURI to a non-nil value so that Spotify plays music after authenticating and App Remote can connect/
@@ -42,14 +42,14 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
 //        let manager = SPTSessionManager(configuration: configuration, delegate: self)
 //        return manager
 //    }()
-
-    lazy var appRemote: SPTAppRemote = {
-        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
-        appRemote.delegate = self
-        return appRemote
-    }()
-
-    fileprivate var lastPlayerState: SPTAppRemotePlayerState?
+//
+//    lazy var appRemote: SPTAppRemote = {
+//        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
+//        appRemote.delegate = self
+//        return appRemote
+//    }()
+//
+//    fileprivate var lastPlayerState: SPTAppRemotePlayerState?
 
     // MARK: - Subviews
 
@@ -65,14 +65,14 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
 
     fileprivate lazy var pauseAndPlayButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(didTapPauseOrPlay), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(didTapPauseOrPlay), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     fileprivate lazy var nextButton: UIButton = {
          let button = UIButton()
-         button.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
+//         button.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
          button.translatesAutoresizingMaskIntoConstraints = false
          return button
      }()
@@ -91,9 +91,25 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
         trackLabel.textAlignment = .center
         return trackLabel
     }()
+    
+//    @objc func didEstablishConnection(){
+//        print("funcionou")
+//    }
+    
+//    @objc func didFailWith(){
+//       print("aqui")
+//    }
+    
+//    @objc func teste() {
+//        print("aqui")
+//
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        SpotifySingleton.shared().observer(vc: self, function: #selector(teste))
+//        NotificationCenter.default.addObserver(self, selector: #selector(didFailWith), name: .didFailWith, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(didEstablishConnection), name: .didEstablish, object: nil)
         view.backgroundColor = UIColor.white
 
         view.addSubview(connectLabel)
@@ -141,86 +157,86 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
         disconnectButton.sizeToFit()
 
         connectButton.addTarget(self, action: #selector(didTapConnect(_:)), for: .touchUpInside)
-        disconnectButton.addTarget(self, action: #selector(didTapDisconnect(_:)), for: .touchUpInside)
+//        disconnectButton.addTarget(self, action: #selector(didTapDisconnect(_:)), for: .touchUpInside)
 
         updateViewBasedOnConnected()
     }
 
-    func update(playerState: SPTAppRemotePlayerState) {
-        if lastPlayerState?.track.uri != playerState.track.uri {
-            fetchArtwork(for: playerState.track)
-        }
-        lastPlayerState = playerState
-        trackLabel.text = playerState.track.name
-        if playerState.isPaused {
-            pauseAndPlayButton.setImage(UIImage(named: "play"), for: .normal)
-        } else {
-            pauseAndPlayButton.setImage(UIImage(named: "pause"), for: .normal)
-        }
-    }
+//    func update(playerState: SPTAppRemotePlayerState) {
+//        if lastPlayerState?.track.uri != playerState.track.uri {
+//            fetchArtwork(for: playerState.track)
+//        }
+//        lastPlayerState = playerState
+//        trackLabel.text = playerState.track.name
+//        if playerState.isPaused {
+//            pauseAndPlayButton.setImage(UIImage(named: "play"), for: .normal)
+//        } else {
+//            pauseAndPlayButton.setImage(UIImage(named: "pause"), for: .normal)
+//        }
+//    }
 
     func updateViewBasedOnConnected() {
         DispatchQueue.main.async {
-            if (self.appRemote.isConnected) {
-                self.connectButton.isHidden = true
-                self.disconnectButton.isHidden = false
-                self.connectLabel.isHidden = true
-                self.imageView.isHidden = false
-                self.trackLabel.isHidden = false
-                self.pauseAndPlayButton.isHidden = false
-                self.nextButton.isHidden = false
-            } else {
-                self.disconnectButton.isHidden = true
-                self.connectButton.isHidden = false
-                self.connectLabel.isHidden = false
-                self.imageView.isHidden = true
-                self.trackLabel.isHidden = true
-                self.pauseAndPlayButton.isHidden = true
-                self.nextButton.isHidden = true
-            }
+//            if (self.appRemote.isConnected) {
+//                self.connectButton.isHidden = true
+//                self.disconnectButton.isHidden = false
+//                self.connectLabel.isHidden = true
+//                self.imageView.isHidden = false
+//                self.trackLabel.isHidden = false
+//                self.pauseAndPlayButton.isHidden = false
+//                self.nextButton.isHidden = false
+//            } else {
+//                self.disconnectButton.isHidden = true
+//                self.connectButton.isHidden = false
+//                self.connectLabel.isHidden = false
+//                self.imageView.isHidden = true
+//                self.trackLabel.isHidden = true
+//                self.pauseAndPlayButton.isHidden = true
+//                self.nextButton.isHidden = true
+//            }
         }
     }
-
-    func fetchArtwork(for track:SPTAppRemoteTrack) {
-        appRemote.imageAPI?.fetchImage(forItem: track, with: CGSize.zero, callback: { [weak self] (image, error) in
-            if let error = error {
-                print("Error fetching track image: " + error.localizedDescription)
-            } else if let image = image as? UIImage {
-                self?.imageView.image = image
-            }
-        })
-    }
-
-    func fetchPlayerState() {
-        appRemote.playerAPI?.getPlayerState({ [weak self] (playerState, error) in
-            if let error = error {
-                print("Error getting player state:" + error.localizedDescription)
-            } else if let playerState = playerState as? SPTAppRemotePlayerState {
-                self?.update(playerState: playerState)
-            }
-        })
-    }
-
-    // MARK: - Actions
-
-    @objc func didTapPauseOrPlay(_ button: UIButton) {
-        if let lastPlayerState = lastPlayerState, lastPlayerState.isPaused {
-            appRemote.playerAPI?.resume(nil)
-        } else {
-            appRemote.playerAPI?.pause(nil)
-        }
-    }
-    
-    @objc func didTapNext(_ button: UIButton) {
-        appRemote.playerAPI?.skip(toNext: .none)
-    }
-
-    @objc func didTapDisconnect(_ button: UIButton) {
-        if (appRemote.isConnected) {
-            appRemote.disconnect()
-        }
-    }
-
+//
+//    func fetchArtwork(for track:SPTAppRemoteTrack) {
+//        appRemote.imageAPI?.fetchImage(forItem: track, with: CGSize.zero, callback: { [weak self] (image, error) in
+//            if let error = error {
+//                print("Error fetching track image: " + error.localizedDescription)
+//            } else if let image = image as? UIImage {
+//                self?.imageView.image = image
+//            }
+//        })
+//    }
+//
+//    func fetchPlayerState() {
+//        appRemote.playerAPI?.getPlayerState({ [weak self] (playerState, error) in
+//            if let error = error {
+//                print("Error getting player state:" + error.localizedDescription)
+//            } else if let playerState = playerState as? SPTAppRemotePlayerState {
+//                self?.update(playerState: playerState)
+//            }
+//        })
+//    }
+//
+//    // MARK: - Actions
+//
+//    @objc func didTapPauseOrPlay(_ button: UIButton) {
+//        if let lastPlayerState = lastPlayerState, lastPlayerState.isPaused {
+//            appRemote.playerAPI?.resume(nil)
+//        } else {
+//            appRemote.playerAPI?.pause(nil)
+//        }
+//    }
+//
+//    @objc func didTapNext(_ button: UIButton) {
+//        appRemote.playerAPI?.skip(toNext: .none)
+//    }
+//
+//    @objc func didTapDisconnect(_ button: UIButton) {
+//        if (appRemote.isConnected) {
+//            appRemote.disconnect()
+//        }
+//    }
+//
     @objc func didTapConnect(_ button: UIButton) {
         /*
          Scopes let you specify exactly what types of data your application wants to
@@ -228,103 +244,97 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
          permissions the user is asked to grant.
          For more information, see https://developer.spotify.com/web-api/using-scopes/.
          */
-        if self.appRemote.isConnected {
-            getAccessToken()
-            print("AccessToken")
-        } else {
-            connect()
-            print("Connect")
-        }
-        
+        SpotifySingleton.shared().connectTapper(vc: self)
+//
 //            sessionManager,
-        
+//
     }
-    
-    func connect() {
-        let scope: SPTScope = [.appRemoteControl, .playlistModifyPublic, .playlistReadCollaborative, .playlistReadPrivate, .playlistModifyPrivate, .userFollowRead]
-        if #available(iOS 11, *) {
-            self.sessionManager.initiateSession(with: scope, options: .default)
-        } else {
-            self.sessionManager.initiateSession(with: scope, options: .default, presenting: self)
-        }
-    }
-    
-    func getAccessToken() {
-        UserRequest().refreshToken { (success, error) in
-            if let accessToken = success?["access_token"] as? String {
-                self.appRemote.connectionParameters.accessToken = accessToken
-                self.appRemote.connect()
-            } else {
-                self.connect()
-            }
-        }
-        updateViewBasedOnConnected()
-    }
-
-
-    // MARK: - SPTSessionManagerDelegate
-
-    func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
-        updateViewBasedOnConnected()
-        presentAlertController(title: "Authorization Failed", message: error.localizedDescription, buttonTitle: "Bummer")
-    }
-
-    func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
-        updateViewBasedOnConnected()
-//        enterApp()
-        presentAlertController(title: "Session Renewed", message: session.description, buttonTitle: "Sweet")
-    }
-
-    func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
-//        enterApp()
-        print("conectou nessa budega")
-        appRemote.connectionParameters.accessToken = session.accessToken
-        appRemote.connect()
-    }
-    
-    func enterApp() {
-        DispatchQueue.main.async {
-            let nav1 = UINavigationController()
-            nav1.navigationBar.barTintColor = UIColor(red: 41.0 / 255.0, green: 41.0 / 255.0, blue: 41.0 / 255.0, alpha: 1.0)
-            nav1.navigationBar.tintColor = .white
-            let mainView = HomeViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
-            nav1.viewControllers = [mainView]
-            UIApplication.shared.keyWindow?.rootViewController = nav1
-        }
-    }
-
-    // MARK: - SPTAppRemoteDelegate
-
-    func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
-        updateViewBasedOnConnected()
-        appRemote.playerAPI?.delegate = self
-        appRemote.playerAPI?.subscribe(toPlayerState: { (success, error) in
-            if let error = error {
-                print("Error subscribing to player state:" + error.localizedDescription)
+//
+//    func connect() {
+//        let scope: SPTScope = [.appRemoteControl, .playlistModifyPublic, .playlistReadCollaborative, .playlistReadPrivate, .playlistModifyPrivate, .userFollowRead]
+//        if #available(iOS 11, *) {
+//            self.sessionManager.initiateSession(with: scope, options: .default)
+//        } else {
+//            self.sessionManager.initiateSession(with: scope, options: .default, presenting: self)
+//        }
+//    }
+//
+//    func getAccessToken() {
+//        UserRequest().refreshToken { (success, error) in
+//            if let accessToken = success?["access_token"] as? String {
+//                self.appRemote.connectionParameters.accessToken = accessToken
+//                self.appRemote.connect()
 //            } else {
-//                self.enterApp()
-            }
-        })
-        enterApp()
-        fetchPlayerState()
-    }
-
-    func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
-        updateViewBasedOnConnected()
-        lastPlayerState = nil
-    }
-
-    func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
-        connect()
-        updateViewBasedOnConnected()
-        lastPlayerState = nil
-    }
-
-    // MARK: - SPTAppRemotePlayerAPIDelegate
-
-    func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
-        update(playerState: playerState)
-    }
+//                self.connect()
+//            }
+//        }
+//        updateViewBasedOnConnected()
+//    }
+//
+//
+//    // MARK: - SPTSessionManagerDelegate
+//
+//    func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
+//        updateViewBasedOnConnected()
+//        presentAlertController(title: "Authorization Failed", message: error.localizedDescription, buttonTitle: "Bummer")
+//    }
+//
+//    func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
+//        updateViewBasedOnConnected()
+////        enterApp()
+//        presentAlertController(title: "Session Renewed", message: session.description, buttonTitle: "Sweet")
+//    }
+//
+//    func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
+////        enterApp()
+//        print("conectou nessa budega")
+//        appRemote.connectionParameters.accessToken = session.accessToken
+//        appRemote.connect()
+//    }
+//
+//    func enterApp() {
+//        DispatchQueue.main.async {
+//            let nav1 = UINavigationController()
+//            nav1.navigationBar.barTintColor = UIColor(red: 41.0 / 255.0, green: 41.0 / 255.0, blue: 41.0 / 255.0, alpha: 1.0)
+//            nav1.navigationBar.tintColor = .white
+//            let mainView = HomeViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
+//            nav1.viewControllers = [mainView]
+//            UIApplication.shared.keyWindow?.rootViewController = nav1
+//        }
+//    }
+//
+//    // MARK: - SPTAppRemoteDelegate
+//
+//    func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
+//        updateViewBasedOnConnected()
+//        appRemote.playerAPI?.delegate = self
+//        appRemote.playerAPI?.subscribe(toPlayerState: { (success, error) in
+//            if let error = error {
+//                print("Error subscribing to player state:" + error.localizedDescription)
+////            } else {
+////                self.enterApp()
+//            }
+//        })
+//        enterApp()
+//        fetchPlayerState()
+//    }
+//
+//    func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
+//        updateViewBasedOnConnected()
+//        lastPlayerState = nil
+//    }
+//
+//    func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
+//        connect()
+//        updateViewBasedOnConnected()
+//        lastPlayerState = nil
+//    }
+//
+//    // MARK: - SPTAppRemotePlayerAPIDelegate
+//
+//    func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
+//        update(playerState: playerState)
+//    }
 
     // MARK: - Private Helpers
 

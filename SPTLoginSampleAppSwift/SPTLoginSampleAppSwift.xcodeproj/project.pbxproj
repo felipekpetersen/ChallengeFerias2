@@ -117,7 +117,7 @@
 		32D60BA823DE41E4004F0C48 /* SpotifySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySingleton.swift; sourceTree = "<group>"; };
 		5413459E20D1049200FD05F7 /* SPTLoginSampleAppSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SPTLoginSampleAppSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		541345A120D2A80300FD05F7 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = ../../SpotifyiOS.framework; sourceTree = "<group>"; };
-		54AC7EDC20081243008CD692 /* SPTLoginSampleAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPTLoginSampleAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54AC7EDC20081243008CD692 /* Synchs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Synchs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54AC7EDF20081243008CD692 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54AC7EE120081243008CD692 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		54AC7EE620081243008CD692 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 		54AC7EDD20081243008CD692 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				54AC7EDC20081243008CD692 /* SPTLoginSampleAppSwift.app */,
+				54AC7EDC20081243008CD692 /* Synchs.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -319,9 +319,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		54AC7EDB20081243008CD692 /* SPTLoginSampleAppSwift */ = {
+		54AC7EDB20081243008CD692 /* Synchs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 54AC7EEE20081243008CD692 /* Build configuration list for PBXNativeTarget "SPTLoginSampleAppSwift" */;
+			buildConfigurationList = 54AC7EEE20081243008CD692 /* Build configuration list for PBXNativeTarget "Synchs" */;
 			buildPhases = (
 				54AC7ED820081243008CD692 /* Sources */,
 				54AC7ED920081243008CD692 /* Frameworks */,
@@ -332,9 +332,9 @@
 			);
 			dependencies = (
 			);
-			name = SPTLoginSampleAppSwift;
+			name = Synchs;
 			productName = SPTLoginSampleAppSwift;
-			productReference = 54AC7EDC20081243008CD692 /* SPTLoginSampleAppSwift.app */;
+			productReference = 54AC7EDC20081243008CD692 /* Synchs.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -367,7 +367,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				54AC7EDB20081243008CD692 /* SPTLoginSampleAppSwift */,
+				54AC7EDB20081243008CD692 /* Synchs */,
 			);
 		};
 /* End PBXProject section */
@@ -574,11 +574,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = DHAN829484;
 				INFOPLIST_FILE = SPTLoginSampleAppSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fepetersen.spotifyTeste;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Synchs;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -589,11 +590,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = DHAN829484;
 				INFOPLIST_FILE = SPTLoginSampleAppSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fepetersen.spotifyTeste;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Synchs;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -611,7 +613,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		54AC7EEE20081243008CD692 /* Build configuration list for PBXNativeTarget "SPTLoginSampleAppSwift" */ = {
+		54AC7EEE20081243008CD692 /* Build configuration list for PBXNativeTarget "Synchs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				54AC7EEF20081243008CD692 /* Debug */,

@@ -63,51 +63,55 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
         }
     }
     
-    @objc func didFailWith(error: Error) {
-        returnError(error: error)
-    }
-    
-    @objc func didEstablishConnection() {
-        returnStablish()
+    func connectTapper(vc: UIViewController) {
+        if self.appRemote.isConnected {
+//            getAccessToken()
+            print("AccessToken")
+        } else {
+            connect(vc: vc)
+            print("Connect")
+        }
     }
     
 //    func setupResponses(error: Error?) {
 //        self.addObserver()
 //    }
+//
+//    func addObserver() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(didFailWith(error:)), name: .didFailWith, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(didEstablishConnection), name: .didEstablish, object: nil)
+//    }
     
-    func addObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didFailWith(error:)), name: .didFailWith, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didEstablishConnection), name: .didFailWith, object: nil)
+    func observer(vc:UIViewController, function: Selector ) {
+        NotificationCenter.default.addObserver(vc, selector: function, name: .didEstablish, object: nil)
     }
     
-    //override it
-    @objc func returnError(error: Error){}
-    @objc func returnStablish(){}
-
     //MARK:- Delegate
     
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
-        <#code#>
+        print("conectou nessa budega")
+        appRemote.connectionParameters.accessToken = session.accessToken
+        appRemote.connect()
     }
     
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
-        self.didFailWith(error: error)
+        NotificationCenter.default.post(name: .didFailWith, object: nil)
     }
     
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
-        self.didEstablishConnection()
+                NotificationCenter.default.post(name: .didEstablish, object: nil)
     }
     
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
-        <#code#>
+        lastPlayerState = nil
     }
     
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
-        <#code#>
+        lastPlayerState = nil
     }
     
     func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
-        <#code#>
+        print("mudar")
     }
     
 }
@@ -128,4 +132,20 @@ extension Notification.Name {
     static var playbackStopped: Notification.Name {
         return .init(rawValue: "SpotifySingleton.playbackStopped")
     }
+    
+    static var didEstablish: Notification.Name {
+        return .init(rawValue: "SpotifySingleton.didEstablish")
+    }
 }
+
+//extension UIViewController {
+//    func addObserver() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(SpotifySingleton.shared().didFailWith(error:)), name: .didFailWith, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(SpotifySingleton.shared().didEstablishConnection), name: .didFailWith, object: nil)
+//    }
+//
+//    //override it
+//    @objc func returnError(error: Error){}
+//    @objc func returnStablish(){}
+//
+//}

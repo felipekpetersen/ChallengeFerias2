@@ -100,34 +100,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - 6c189140c4baacb4"
+                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - 300e54ee57945a0a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "SPTLoginSampleAppSwift.ConnectViewController.appRemoteDidEstablishConnection(__C.SPTAppRemote) -&gt; ()"
-                  moduleName = "SPTLoginSampleAppSwift"
+                  symbolName = "Syncs.ConnectViewController.appRemoteDidEstablishConnection(__C.SPTAppRemote) -&gt; ()"
+                  moduleName = "Syncs"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/felipepetersen/Desktop/Academy/Projetos/ChallengeFerias2/SPTLoginSampleAppSwift/SPTLoginSampleAppSwift/Views/ConnectViewController/ConnectViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "234"
                   endingLineNumber = "234"
-                  offsetFromSymbolStart = "252">
+                  offsetFromSymbolStart = "272">
                </Location>
                <Location
-                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - ac9e51b318bb3e8b"
+                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - bb2be78f183bc203"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SPTLoginSampleAppSwift.ConnectViewController.appRemoteDidEstablishConnection(__C.SPTAppRemote) -&gt; ()"
-                  moduleName = "SPTLoginSampleAppSwift"
+                  symbolName = "closure #1 (Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Syncs.ConnectViewController.appRemoteDidEstablishConnection(__C.SPTAppRemote) -&gt; ()"
+                  moduleName = "Syncs"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/felipepetersen/Desktop/Academy/Projetos/ChallengeFerias2/SPTLoginSampleAppSwift/SPTLoginSampleAppSwift/Views/ConnectViewController/ConnectViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "235"
                   endingLineNumber = "235"
-                  offsetFromSymbolStart = "106">
+                  offsetFromSymbolStart = "128">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -161,6 +161,54 @@
             startingLineNumber = "92"
             endingLineNumber = "92"
             landmarkName = "tableView(_:heightForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DC8DEDD8-9562-4293-A38F-1D1FBD8B53AE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SPTLoginSampleAppSwift/Helpers/SpotifySingleton.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "connectTapper(vc:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BEB0A3E8-07D3-454A-A702-35266A030319"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SPTLoginSampleAppSwift/Helpers/SpotifySingleton.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "connect(vc:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E79A48E9-6286-4C4A-8816-22F5CDAB000E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SPTLoginSampleAppSwift/Helpers/SpotifySingleton.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "appRemoteDidEstablishConnection(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
