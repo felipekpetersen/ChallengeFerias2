@@ -18,10 +18,18 @@ class PlayerModalViewController: UIViewController {
     
     
     let colors = Colors()
+    var music = MockModel()
+    
+    convenience init(music: MockModel) {
+        self.init()
+        self.music = music
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
+        setupView()
+        setupViewTap()
     }
     
     func setupBackground() {
@@ -29,6 +37,12 @@ class PlayerModalViewController: UIViewController {
             var backgroundLayer = colors.gl
         backgroundLayer?.frame = degradeView.frame
         degradeView.layer.insertSublayer(backgroundLayer!, at: 0)
+    }
+    
+    func setupView() {
+        self.musicNameLabel.text = music.musicName
+        self.artirstNameLabel.text = music.artist
+        self.backgroundImageView.image = UIImage(named: music.albumImage ?? "")
     }
     
     @IBAction func didTapPrevButton(_ sender: Any) {

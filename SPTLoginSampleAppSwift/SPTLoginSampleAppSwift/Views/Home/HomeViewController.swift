@@ -20,6 +20,9 @@ class HomeViewController: UIViewController {
     static let numberOfCellsPlaylist = 10
     lazy var fixHeight: CGFloat = CGFloat(140 + HomeViewController.numberOfCellsPlaylist * 36)
     var openedRow: IndexPath?
+    var viewModel = HomeViewModel()
+    var selectedMusic: MockModel?
+    var selectedIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,12 @@ class HomeViewController: UIViewController {
         setupNavigation()
         setupShadowView()
         setupViewTaps()
+        self.viewModel.getModel()
+        setupPlayer()
+    }
+    
+    func setupPlayer() {
+        self.albumImageView.image = UIImage(named: self.selectedMusic?.albumImage ?? "music_placeholder")
     }
     
     func setupNavigation() {
@@ -62,10 +71,12 @@ class HomeViewController: UIViewController {
     }
     
     @objc func didTapPlayer() {
-        let vc = PlayerModalViewController()
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.modalTransitionStyle = .crossDissolve
-        self.navigationController?.present(vc, animated: true, completion: nil)
+        if let music = selectedMusic {
+            let vc = PlayerModalViewController(music: music)
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.modalTransitionStyle = .crossDissolve
+            self.navigationController?.present(vc, animated: true, completion: nil)
+        }
     }
     
     @IBAction func didTapLessButton(_ sender: Any) {
@@ -76,46 +87,61 @@ class HomeViewController: UIViewController {
     
     @IBAction func didTapPlusButton(_ sender: Any) {
     }
-    
-
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel.getNumberOfRows() + 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 150
+            return 140
         } else if let openedRow = openedRow, indexPath == openedRow {
             return fixHeight
         } else {
-            return 140
+            switch viewModel.getCellTypeForRow(index: indexPath.row - 1) {
+            case .music:
+                return 90
+            case .playlist:
+                return 140
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let shareCell = self.postTableView.dequeueReusableCell(withIdentifier: SHARE_CELL, for: indexPath) as! ShareTableViewCell
+            shareCell.setup(musics: self.viewModel.model ?? [MockModel]())
             shareCell.delegate = self
             return shareCell
         } else {
-            let playlistCell = self.postTableView.dequeueReusableCell(withIdentifier: PLAYLIST_CELL, for: indexPath) as! PlaylistTableViewCell
-            playlistCell.delegate = self
-            playlistCell.setup(indexPath: indexPath, height: fixHeight, isOpen: self.openedRow == indexPath)
-            //        playlistCell.layoutSubviews()
-            //        playlistCell.layoutIfNeeded()
-            playlistCell.selectionStyle = .none
-            return playlistCell
+            let musicCell = self.postTableView.dequeueReusableCell(withIdentifier: MUSIC_CELL, for: indexPath) as! MusicTableViewCell
+            musicCell.setup(music: self.viewModel.getMusicForRow(index: indexPath.row - 1), isSelected: selectedIndex == indexPath.row)
+            return musicCell
+//            let playlistCell = self.postTableView.dequeueReusableCell(withIdentifier: PLAYLIST_CELL, for: indexPath) as! PlaylistTableViewCell
+//            playlistCell.delegate = self
+//            playlistCell.setup(indexPath: indexPath, height: fixHeight, isOpen: self.openedRow == indexPath)
+//            //        playlistCell.layoutSubviews()
+//            //        playlistCell.layoutIfNeeded()
+//            playlistCell.selectionStyle = .none
+//            return playlistCell
         }
-//        let musicCell = self.postTableView.dequeueReusableCell(withIdentifier: MUSIC_CELL, for: indexPath) as! MusicTableViewCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.viewModel.getCellTypeForRow(index: indexPath.row) == .music, indexPath.row != 0 {
+            self.selectedMusic = self.viewModel.getMusicForRow(index: indexPath.row - 1)
+            self.selectedIndex = indexPath.row
+            self.postTableView.reloadData()
+            setupPlayer()
+        }
     }
 }
 
 extension HomeViewController: ShareTableViewCellDelegate {
-    func didTapItem(state: ShareModalViewControllerState) {
-        let vc = ShareModalViewController(state: state)
+    func didTapItem(item: MockModel?) {
+        let vc = ShareModalViewController(item: item, recommended: self.viewModel.model ?? [MockModel]())
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         self.navigationController?.present(vc, animated: true, completion: nil)

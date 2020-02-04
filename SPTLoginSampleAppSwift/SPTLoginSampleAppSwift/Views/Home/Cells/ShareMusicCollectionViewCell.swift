@@ -17,5 +17,10 @@ class ShareMusicCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    func setup(music: MockModel) {
+        self.titleLabel.text = music.musicName
+        self.albumImageView.image = UIImage(named: music.albumImage ?? "")
+    }
 
 }

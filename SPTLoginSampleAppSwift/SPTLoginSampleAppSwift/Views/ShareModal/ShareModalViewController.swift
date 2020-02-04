@@ -21,6 +21,7 @@ class ShareModalViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var musicNameLabel: UILabel!
     @IBOutlet weak var artistNameLabel: UILabel!
+    @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var shareView: RoundedView!
     @IBOutlet weak var musicView: UIView!
     @IBOutlet weak var modalHeight: NSLayoutConstraint!
@@ -28,11 +29,13 @@ class ShareModalViewController: UIViewController {
     @IBOutlet weak var bottomStackConstraint: NSLayoutConstraint!
     
     let SEARCH_CELL = "SearchMusicTableViewCell"
-    var state: ShareModalViewControllerState = .fromSearch
+    var sharingItem: MockModel?
+    var recommended = [MockModel]()
     
-    convenience init(state: ShareModalViewControllerState) {
+    convenience init(item: MockModel?, recommended: [MockModel]) {
         self.init()
-        self.state = state
+        self.sharingItem = item
+        self.recommended = recommended
     }
 
     override func viewDidLoad() {
@@ -47,6 +50,7 @@ class ShareModalViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: SEARCH_CELL, bundle: nil), forCellReuseIdentifier: SEARCH_CELL)
+        self.tableView.separatorStyle = .none
     }
     
     func setupViewTap() {
@@ -65,10 +69,12 @@ class ShareModalViewController: UIViewController {
     }
     
     func setupViewState() {
-        switch state {
-        case .fromCell:
+        if let item = sharingItem {
             self.musicView.isHidden = false
-        default:
+            self.musicNameLabel.text = item.musicName
+            self.artistNameLabel.text = item.artist
+            self.albumImageView.image = UIImage(named: item.albumImage ?? "")
+        } else {
             self.musicView.isHidden = true
         }
     }
@@ -77,12 +83,12 @@ class ShareModalViewController: UIViewController {
 extension ShareModalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return recommended.count
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Recommended"
-    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Recommended"
+//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 16))
@@ -90,13 +96,21 @@ extension ShareModalViewController: UITableViewDelegate, UITableViewDataSource {
         let label = UILabel(frame: CGRect(x: 16, y: 0, width: self.view.frame.width - 16, height: 16))
         label.text = "Recommended"
         label.font = UIFont(name: "SourceSansPro-Semibold", size: 18)
+        label.textColor = .white
         view.addSubview(label)
         return view
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: SEARCH_CELL, for: indexPath) as! SearchMusicTableViewCell
+        cell.setup(music: recommended[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.sharingItem = recommended[indexPath.row]
+        self.view.endEditing(true)
+        self.setupViewState()
     }
 }
 
@@ -104,9 +118,17 @@ extension ShareModalViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         UIView.animate(withDuration: 0.4) {
             self.modalHeight.constant = self.view.frame.height - 80
-            self.bottomStackConstraint.constant = 200
+            self.bottomStackConstraint.constant = 300
             self.view.layoutIfNeeded()
         }
         return true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        UIView.animate(withDuration: 0.4) {
+            self.modalHeight.constant = 360
+            self.bottomStackConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }
     }
 }

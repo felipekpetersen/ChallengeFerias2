@@ -16,8 +16,9 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareModalViewController" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareModalViewController" customModule="Synchs" customModuleProvider="target">
             <connections>
+                <outlet property="albumImageView" destination="0TH-Tu-ebD" id="W7X-Za-sJE"/>
                 <outlet property="artistNameLabel" destination="FbC-HW-7P3" id="teq-NY-3gP"/>
                 <outlet property="bottomStackConstraint" destination="3g4-55-F4Y" id="xEb-N3-Xjb"/>
                 <outlet property="modalHeight" destination="Smu-18-NSh" id="64c-Ko-Vmm"/>
@@ -39,7 +40,7 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Bt-vu-lg9" customClass="RoundedView" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Bt-vu-lg9" customClass="RoundedView" customModule="Synchs" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="536" width="414" height="360"/>
                     <subviews>
                         <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Search Music" translatesAutoresizingMaskIntoConstraints="NO" id="daW-6d-iah">
@@ -58,10 +59,10 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2mf-Xf-bnP">
                             <rect key="frame" x="0.0" y="74" width="414" height="286"/>
                             <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m2l-a3-cLJ">
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m2l-a3-cLJ">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="196"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                    <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" red="0.36078431370000003" green="0.36078431370000003" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="sectionIndexBackgroundColor" red="0.36078431372549019" green="0.36078431372549019" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5St-kz-uS0">
                                     <rect key="frame" x="0.0" y="196" width="414" height="90"/>
@@ -83,7 +84,7 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozq-dT-EUD" customClass="RoundedView" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozq-dT-EUD" customClass="RoundedView" customModule="Synchs" customModuleProvider="target">
                                             <rect key="frame" x="16" y="8" width="50" height="50"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="0TH-Tu-ebD">
@@ -105,7 +106,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2o-bB-YJo" customClass="RoundedView" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2o-bB-YJo" customClass="RoundedView" customModule="Synchs" customModuleProvider="target">
                                             <rect key="frame" x="337" y="18" width="61" height="30"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Yc6-OX-Qiy">
@@ -173,7 +174,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXf-VY-CYB" customClass="RoundedView" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXf-VY-CYB" customClass="RoundedView" customModule="Synchs" customModuleProvider="target">
                     <rect key="frame" x="182" y="522" width="50" height="6"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.36078431370000003" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>

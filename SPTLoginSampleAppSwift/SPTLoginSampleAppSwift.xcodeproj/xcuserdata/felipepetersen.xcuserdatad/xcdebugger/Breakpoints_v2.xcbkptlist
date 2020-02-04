@@ -100,12 +100,12 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - 300e54ee57945a0a"
+                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - 6c1522f6df704cea"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Syncs.ConnectViewController.appRemoteDidEstablishConnection(__C.SPTAppRemote) -&gt; ()"
-                  moduleName = "Syncs"
+                  symbolName = "Synchs.ConnectViewController.appRemoteDidEstablishConnection(__C.SPTAppRemote) -&gt; ()"
+                  moduleName = "Synchs"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/felipepetersen/Desktop/Academy/Projetos/ChallengeFerias2/SPTLoginSampleAppSwift/SPTLoginSampleAppSwift/Views/ConnectViewController/ConnectViewController.swift"
                   startingColumnNumber = "9223372036854775807"
@@ -115,12 +115,12 @@
                   offsetFromSymbolStart = "272">
                </Location>
                <Location
-                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - bb2be78f183bc203"
+                  uuid = "A6D1F6C0-9760-436F-AA14-5A6B1C7C1EA6 - e4d4d0cd23eac747"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Syncs.ConnectViewController.appRemoteDidEstablishConnection(__C.SPTAppRemote) -&gt; ()"
-                  moduleName = "Syncs"
+                  symbolName = "closure #1 (Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Synchs.ConnectViewController.appRemoteDidEstablishConnection(__C.SPTAppRemote) -&gt; ()"
+                  moduleName = "Synchs"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/felipepetersen/Desktop/Academy/Projetos/ChallengeFerias2/SPTLoginSampleAppSwift/SPTLoginSampleAppSwift/Views/ConnectViewController/ConnectViewController.swift"
                   startingColumnNumber = "9223372036854775807"
@@ -145,22 +145,6 @@
             startingLineNumber = "74"
             endingLineNumber = "74"
             landmarkName = "setupConstraints()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A225A81D-0234-4B1F-B165-7EDB33020306"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SPTLoginSampleAppSwift/Views/Home/HomeViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "tableView(_:heightForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

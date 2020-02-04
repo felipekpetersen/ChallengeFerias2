@@ -82,7 +82,7 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
 //        NotificationCenter.default.addObserver(self, selector: #selector(didEstablishConnection), name: .didEstablish, object: nil)
 //    }
     
-    func observer(vc:UIViewController, function: Selector ) {
+    func observerDidEstablish(vc:UIViewController, function: Selector ) {
         NotificationCenter.default.addObserver(vc, selector: function, name: .didEstablish, object: nil)
     }
     
@@ -99,7 +99,7 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
     }
     
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
-                NotificationCenter.default.post(name: .didEstablish, object: nil)
+        NotificationCenter.default.post(name: .didEstablish, object: nil)
     }
     
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {

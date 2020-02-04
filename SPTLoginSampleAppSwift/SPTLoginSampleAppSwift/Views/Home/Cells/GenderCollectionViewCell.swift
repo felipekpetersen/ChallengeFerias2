@@ -9,10 +9,16 @@
 import UIKit
 
 class GenderCollectionViewCell: UICollectionViewCell {
-
+    
+    @IBOutlet weak var genderLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    func setup(gender: String) {
+        self.genderLabel.text = gender
     }
 
 }

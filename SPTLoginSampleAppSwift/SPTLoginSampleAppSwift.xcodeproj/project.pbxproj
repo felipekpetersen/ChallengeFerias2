@@ -50,6 +50,8 @@
 		32D60BA623DCD517004F0C48 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D60BA423DCD517004F0C48 /* SignInViewController.swift */; };
 		32D60BA723DCD517004F0C48 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32D60BA523DCD517004F0C48 /* SignInViewController.xib */; };
 		32D60BA923DE41E5004F0C48 /* SpotifySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D60BA823DE41E4004F0C48 /* SpotifySingleton.swift */; };
+		32D60BAC23E79582004F0C48 /* MockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D60BAB23E79582004F0C48 /* MockModel.swift */; };
+		32D60BAE23E79D61004F0C48 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D60BAD23E79D61004F0C48 /* HomeViewModel.swift */; };
 		541345A220D2A80300FD05F7 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541345A120D2A80300FD05F7 /* SpotifyiOS.framework */; };
 		54AC7EE020081243008CD692 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AC7EDF20081243008CD692 /* AppDelegate.swift */; };
 		54AC7EE220081243008CD692 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AC7EE120081243008CD692 /* ViewController.swift */; };
@@ -115,6 +117,8 @@
 		32D60BA423DCD517004F0C48 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		32D60BA523DCD517004F0C48 /* SignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
 		32D60BA823DE41E4004F0C48 /* SpotifySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySingleton.swift; sourceTree = "<group>"; };
+		32D60BAB23E79582004F0C48 /* MockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModel.swift; sourceTree = "<group>"; };
+		32D60BAD23E79D61004F0C48 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5413459E20D1049200FD05F7 /* SPTLoginSampleAppSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SPTLoginSampleAppSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		541345A120D2A80300FD05F7 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = ../../SpotifyiOS.framework; sourceTree = "<group>"; };
 		54AC7EDC20081243008CD692 /* Synchs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Synchs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +216,7 @@
 				32A8AD3623CFCB60008B71CC /* Cells */,
 				32A8AD3223CFCAC9008B71CC /* HomeViewController.swift */,
 				32A8AD3323CFCAC9008B71CC /* HomeViewController.xib */,
+				32D60BAD23E79D61004F0C48 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -271,6 +276,14 @@
 			path = SignIn;
 			sourceTree = "<group>";
 		};
+		32D60BAA23E7956C004F0C48 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				32D60BAB23E79582004F0C48 /* MockModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		54073AB820C5D5300060E089 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +312,7 @@
 		54AC7EDE20081243008CD692 /* SPTLoginSampleAppSwift */ = {
 			isa = PBXGroup;
 			children = (
+				32D60BAA23E7956C004F0C48 /* Model */,
 				32A8AD3E23D229F4008B71CC /* Fonts */,
 				32A8AD3B23D2273A008B71CC /* Helpers */,
 				32A8AD3023CFCAA7008B71CC /* Views */,
@@ -420,9 +434,11 @@
 				3206E07023D89ED700106A43 /* FriendTableViewCell.swift in Sources */,
 				3206E06023D3EA6800106A43 /* ScrollViewExtension.swift in Sources */,
 				54AC7EE220081243008CD692 /* ViewController.swift in Sources */,
+				32D60BAE23E79D61004F0C48 /* HomeViewModel.swift in Sources */,
 				3206E05D23D3CDC400106A43 /* SearchMusicTableViewCell.swift in Sources */,
 				32A8AD4923D233D3008B71CC /* GenderCollectionViewCell.swift in Sources */,
 				32D60B9B23DA2AD1004F0C48 /* PlaylistMusicTableViewCell.swift in Sources */,
+				32D60BAC23E79582004F0C48 /* MockModel.swift in Sources */,
 				32A8AD3923CFCB77008B71CC /* MusicTableViewCell.swift in Sources */,
 				3206E07623DA1AB100106A43 /* PlaylistTableViewCell.swift in Sources */,
 				3206E05823D3B58700106A43 /* ShareModalViewController.swift in Sources */,
@@ -574,7 +590,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = DHAN829484;
 				INFOPLIST_FILE = SPTLoginSampleAppSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -590,7 +606,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = DHAN829484;
 				INFOPLIST_FILE = SPTLoginSampleAppSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

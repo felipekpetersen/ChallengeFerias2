@@ -16,7 +16,14 @@ class SearchMusicTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
         // Initialization code
+    }
+    
+    func setup(music: MockModel) {
+        self.musicTitleLabel.text = music.musicName
+        self.artistNameLabel.text = music.artist
+        self.albumImageView.image = UIImage(named: music.albumImage ?? "")
     }
     
 }

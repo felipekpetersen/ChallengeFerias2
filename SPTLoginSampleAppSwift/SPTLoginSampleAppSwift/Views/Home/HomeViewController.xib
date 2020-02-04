@@ -8,9 +8,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Synchs" customModuleProvider="target">
             <connections>
-                <outlet property="albumImageView" destination="Lex-vI-xT7" id="5np-LQ-2Td"/>
+                <outlet property="albumImageView" destination="Lex-vI-xT7" id="iIH-Zz-7cl"/>
                 <outlet property="playerView" destination="EOO-UU-I26" id="H6r-gM-X9J"/>
                 <outlet property="postTableView" destination="neq-86-VuA" id="Fea-kU-bgP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -25,7 +25,7 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOO-UU-I26" customClass="RoundedView" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOO-UU-I26" customClass="RoundedView" customModule="Synchs" customModuleProvider="target">
                     <rect key="frame" x="222" y="754" width="200" height="48"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Lex-vI-xT7">

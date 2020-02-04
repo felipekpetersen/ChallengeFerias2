@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ShareTableViewCellDelegate {
-    func didTapItem(state: ShareModalViewControllerState)
+    func didTapItem(item: MockModel?)
 }
 
 enum SelectedSharedType {
@@ -27,17 +27,22 @@ class ShareTableViewCell: UITableViewCell {
     let MUSIC_CELL = "ShareMusicCollectionViewCell"
     var delegate: ShareTableViewCellDelegate?
     var selectedType: SelectedSharedType = .music
+    var musics = [MockModel]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupCollectionView()
-        setupViewTap()
     }
     
     func setupCollectionView() {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.register(UINib(nibName: MUSIC_CELL, bundle: nil), forCellWithReuseIdentifier: MUSIC_CELL)
+    }
+    
+    func setup(musics: [MockModel]) {
+        self.musics = musics
+        setupCollectionView()
+        setupViewTap()
     }
     
     func setupViewTap() {
@@ -66,14 +71,14 @@ class ShareTableViewCell: UITableViewCell {
     }
     
     @objc func didTapSearchView() {
-        delegate?.didTapItem(state: .fromSearch)
+        delegate?.didTapItem(item: nil)
     }
 }
 
 extension ShareTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return musics.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -82,7 +87,12 @@ extension ShareTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MUSIC_CELL, for: indexPath) as? ShareMusicCollectionViewCell
+        cell?.setup(music: self.musics[indexPath.row])
         return cell ?? UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didTapItem(item: musics[indexPath.row])
     }
     
     

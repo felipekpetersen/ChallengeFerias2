@@ -26,6 +26,7 @@ class FriendsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        self.qrImageView.image = QRCodeGenerator.qrImage(from: "osijhda0932u")
     }
     
     func setupTableView() {
