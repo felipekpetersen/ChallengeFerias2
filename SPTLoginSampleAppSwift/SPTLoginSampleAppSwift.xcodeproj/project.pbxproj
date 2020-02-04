@@ -52,6 +52,7 @@
 		32D60BA923DE41E5004F0C48 /* SpotifySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D60BA823DE41E4004F0C48 /* SpotifySingleton.swift */; };
 		32D60BAC23E79582004F0C48 /* MockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D60BAB23E79582004F0C48 /* MockModel.swift */; };
 		32D60BAE23E79D61004F0C48 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D60BAD23E79D61004F0C48 /* HomeViewModel.swift */; };
+		32D60BB023E9B479004F0C48 /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D60BAF23E9B479004F0C48 /* ExtensionViewController.swift */; };
 		541345A220D2A80300FD05F7 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541345A120D2A80300FD05F7 /* SpotifyiOS.framework */; };
 		54AC7EE020081243008CD692 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AC7EDF20081243008CD692 /* AppDelegate.swift */; };
 		54AC7EE220081243008CD692 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AC7EE120081243008CD692 /* ViewController.swift */; };
@@ -119,6 +120,7 @@
 		32D60BA823DE41E4004F0C48 /* SpotifySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySingleton.swift; sourceTree = "<group>"; };
 		32D60BAB23E79582004F0C48 /* MockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModel.swift; sourceTree = "<group>"; };
 		32D60BAD23E79D61004F0C48 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		32D60BAF23E9B479004F0C48 /* ExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
 		5413459E20D1049200FD05F7 /* SPTLoginSampleAppSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SPTLoginSampleAppSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		541345A120D2A80300FD05F7 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = ../../SpotifyiOS.framework; sourceTree = "<group>"; };
 		54AC7EDC20081243008CD692 /* Synchs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Synchs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,6 +251,7 @@
 				3206E06B23D8945000106A43 /* QRCodeGenerator.swift */,
 				3206E07223D92C0600106A43 /* ColorHelper.swift */,
 				32D60BA823DE41E4004F0C48 /* SpotifySingleton.swift */,
+				32D60BAF23E9B479004F0C48 /* ExtensionViewController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				3206E05823D3B58700106A43 /* ShareModalViewController.swift in Sources */,
 				324A327E23D2B60C005FCAB4 /* PlayerModalViewController.swift in Sources */,
 				54AC7EE020081243008CD692 /* AppDelegate.swift in Sources */,
+				32D60BB023E9B479004F0C48 /* ExtensionViewController.swift in Sources */,
 				32A8AD3423CFCAC9008B71CC /* HomeViewController.swift in Sources */,
 				32A8AD5123D256B5008B71CC /* ShareMusicCollectionViewCell.swift in Sources */,
 				32D60BA623DCD517004F0C48 /* SignInViewController.swift in Sources */,
