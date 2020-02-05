@@ -8,7 +8,8 @@
 
 import Foundation
 
-class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate  {
+class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
+    
     
     static let SpotifyClientID = "9a41d6d229754090b8cd983dacfc89e7"
     static let SpotifyRedirectURI = URL(string: "syncs-login://callback")!
@@ -37,7 +38,6 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
     }()
 
     fileprivate var lastPlayerState: SPTAppRemotePlayerState?
-
 
     private override init() {
     }
@@ -73,20 +73,48 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
         }
     }
     
-//    func setupResponses(error: Error?) {
-//        self.addObserver()
-//    }
-//
-//    func addObserver() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(didFailWith(error:)), name: .didFailWith, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(didEstablishConnection), name: .didEstablish, object: nil)
-//    }
+    //MARK:- Observers
     
     func observerDidEstablish(vc:UIViewController, function: Selector ) {
         NotificationCenter.default.addObserver(vc, selector: function, name: .didEstablish, object: nil)
     }
     
+    func observerDidFail(vc:UIViewController, function: Selector ) {
+        NotificationCenter.default.addObserver(vc, selector: function, name: .didFailWith, object: nil)
+    }
+    
+    //MARK:- Player
+    
+    func getAccessToken() -> String {
+        return appRemote.connectionParameters.accessToken ?? ""
+    }
+    
+    func playerIsPaused() -> Bool {
+        return lastPlayerState?.isPaused ?? true
+    }
+    
+    func fetchArtwork(for track:SPTAppRemoteTrack) -> UIImage {
+        var receivedImage = UIImage()
+         appRemote.imageAPI?.fetchImage(forItem: track, with: CGSize.zero, callback: { [weak self] (image, error) in
+             if let error = error {
+                 print("Error fetching track image: " + error.localizedDescription)
+             } else if let image = image as? UIImage {
+                receivedImage = image
+             }
+         })
+        return receivedImage
+     }
+    
+    func getMusic() {
+        self.lastPlayerState?.track.artist.name
+    }
+    
+    
     //MARK:- Delegate
+    
+        func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
+            NotificationCenter.default.post(name: .didEstablish, object: nil)
+        }
     
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
         print("conectou nessa budega")

@@ -24,6 +24,7 @@ class SignInViewController: UIViewController {
         let connectTap = UITapGestureRecognizer(target: self, action: #selector(didTapConnect(_:)))
         self.connectView.addGestureRecognizer(connectTap)
         SpotifySingleton.shared().observerDidEstablish(vc: self, function: #selector(didStablish))
+        SpotifySingleton.shared().observerDidFail(vc: self, function: #selector(didFail))
     }
 
     // MARK: - Actions
@@ -61,7 +62,13 @@ class SignInViewController: UIViewController {
     
     @objc func didStablish() {
         self.hideLoader()
+        print(SpotifySingleton.shared().getAccessToken())
         enterApp()
+    }
+    
+    @objc func didFail() {
+        self.hideLoader()
+        self.showErrorAlert(message: "Tente novamente")
     }
     
     func enterApp() {

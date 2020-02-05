@@ -86,3 +86,13 @@ class MockModel {
     }
 }
 
+class MusicModel {
+    var musicName: String?
+    var artist: String?
+    var album: String?
+    var albumImage: UIImage?
+    var duration: Float?
+    var gender: [String]?
+    var type: HomeCellType?
+}
+
