@@ -89,6 +89,10 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
         return appRemote.connectionParameters.accessToken ?? ""
     }
     
+    func getRefreshToken() -> String {
+        return UserDefaults.standard.string(forKey: "REFRESH") ?? ""
+    }
+    
     func playerIsPaused() -> Bool {
         return lastPlayerState?.isPaused ?? true
     }
@@ -106,7 +110,7 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
      }
     
     func getMusic() {
-        self.lastPlayerState?.track.artist.name
+//        self.lastPlayerState?.track.artist.name
     }
     
     
@@ -119,7 +123,9 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
         print("conectou nessa budega")
         appRemote.connectionParameters.accessToken = session.accessToken
+        UserDefaults.standard.set(session.refreshToken, forKey: "REFRESH")
         appRemote.connect()
+        
     }
     
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {

@@ -12,7 +12,6 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var connectView: RoundedView!
     
- 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewTaps()
@@ -63,6 +62,7 @@ class SignInViewController: UIViewController {
     @objc func didStablish() {
         self.hideLoader()
         print(SpotifySingleton.shared().getAccessToken())
+        print(SpotifySingleton.shared().getRefreshToken())
         enterApp()
     }
     

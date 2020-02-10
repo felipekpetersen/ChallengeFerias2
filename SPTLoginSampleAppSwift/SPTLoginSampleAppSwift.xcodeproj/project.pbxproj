@@ -27,6 +27,8 @@
 		323984722373000300CDCCF7 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323984712373000300CDCCF7 /* RequestModel.swift */; };
 		324A327E23D2B60C005FCAB4 /* PlayerModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324A327C23D2B60C005FCAB4 /* PlayerModalViewController.swift */; };
 		324A327F23D2B60C005FCAB4 /* PlayerModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324A327D23D2B60C005FCAB4 /* PlayerModalViewController.xib */; };
+		328D559A23F184370079684E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328D559823F184370079684E /* Network.swift */; };
+		328D559B23F184370079684E /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328D559923F184370079684E /* Router.swift */; };
 		32A8AD3423CFCAC9008B71CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8AD3223CFCAC9008B71CC /* HomeViewController.swift */; };
 		32A8AD3523CFCAC9008B71CC /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A8AD3323CFCAC9008B71CC /* HomeViewController.xib */; };
 		32A8AD3923CFCB77008B71CC /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8AD3723CFCB77008B71CC /* MusicTableViewCell.swift */; };
@@ -95,6 +97,8 @@
 		323984712373000300CDCCF7 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		324A327C23D2B60C005FCAB4 /* PlayerModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModalViewController.swift; sourceTree = "<group>"; };
 		324A327D23D2B60C005FCAB4 /* PlayerModalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerModalViewController.xib; sourceTree = "<group>"; };
+		328D559823F184370079684E /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		328D559923F184370079684E /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		32A8AD3223CFCAC9008B71CC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		32A8AD3323CFCAC9008B71CC /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		32A8AD3723CFCB77008B71CC /* MusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
@@ -197,6 +201,15 @@
 				324A327D23D2B60C005FCAB4 /* PlayerModalViewController.xib */,
 			);
 			path = PlayerModal;
+			sourceTree = "<group>";
+		};
+		328D559723F183A20079684E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				328D559823F184370079684E /* Network.swift */,
+				328D559923F184370079684E /* Router.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		32A8AD3023CFCAA7008B71CC /* Views */ = {
@@ -315,6 +328,7 @@
 		54AC7EDE20081243008CD692 /* SPTLoginSampleAppSwift */ = {
 			isa = PBXGroup;
 			children = (
+				328D559723F183A20079684E /* Network */,
 				32D60BAA23E7956C004F0C48 /* Model */,
 				32A8AD3E23D229F4008B71CC /* Fonts */,
 				32A8AD3B23D2273A008B71CC /* Helpers */,
@@ -430,6 +444,7 @@
 				32A8AD3D23D22747008B71CC /* RoundedView.swift in Sources */,
 				323984722373000300CDCCF7 /* RequestModel.swift in Sources */,
 				54BDA67A200E8A74005E72F1 /* ConnectButton.swift in Sources */,
+				328D559A23F184370079684E /* Network.swift in Sources */,
 				322DD5AC2372094400821A6D /* PlayerViewController.swift in Sources */,
 				3206E06C23D8945000106A43 /* QRCodeGenerator.swift in Sources */,
 				3206E06723D887AF00106A43 /* FriendsViewController.swift in Sources */,
@@ -448,6 +463,7 @@
 				324A327E23D2B60C005FCAB4 /* PlayerModalViewController.swift in Sources */,
 				54AC7EE020081243008CD692 /* AppDelegate.swift in Sources */,
 				32D60BB023E9B479004F0C48 /* ExtensionViewController.swift in Sources */,
+				328D559B23F184370079684E /* Router.swift in Sources */,
 				32A8AD3423CFCAC9008B71CC /* HomeViewController.swift in Sources */,
 				32A8AD5123D256B5008B71CC /* ShareMusicCollectionViewCell.swift in Sources */,
 				32D60BA623DCD517004F0C48 /* SignInViewController.swift in Sources */,

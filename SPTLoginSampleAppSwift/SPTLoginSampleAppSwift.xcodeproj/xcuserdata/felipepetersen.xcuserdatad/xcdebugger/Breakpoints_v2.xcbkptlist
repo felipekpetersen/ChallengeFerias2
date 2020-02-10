@@ -151,15 +151,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "20838036-A8B8-4BA2-93A6-8F55FDC6C875"
+            uuid = "6C21ED65-BEC2-4FF4-BD4C-016F900D4E3B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPTLoginSampleAppSwift/Views/SignIn/SignInViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "didStablish()"
             landmarkType = "7">
          </BreakpointContent>
