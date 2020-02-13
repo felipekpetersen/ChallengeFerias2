@@ -9,7 +9,7 @@
 import Alamofire
 
 public enum RouterUrl: String {
-    case hub  = "https://1c0f0c49-8521-4ca4-a68c-be57e5d91817.mock.pstmn.io"
+    case hub  = "http://fepetersenspotify.herokuapp.com"
     case local = "http://localhost:3000"
 }
 
@@ -24,7 +24,7 @@ public protocol RouterProtocol {
 extension RouterProtocol {
     
     var url: String {
-        return "https://1c0f0c49-8521-4ca4-a68c-be57e5d91817.mock.pstmn.io" + self.path
+        return "http://fepetersenspotify.herokuapp.com" + self.path
     }
     
     var headers: [String: String]? {

@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     lazy var fixHeight: CGFloat = CGFloat(140 + HomeViewController.numberOfCellsPlaylist * 36)
     var openedRow: IndexPath?
     var viewModel = HomeViewModel()
-    var selectedMusic: MockModel?
+    var selectedMusic: TopItem?
     var selectedIndex: Int?
     
     override func viewDidLoad() {
@@ -30,12 +30,80 @@ class HomeViewController: UIViewController {
         setupNavigation()
         setupShadowView()
         setupViewTaps()
-        self.viewModel.getModel()
+//        self.viewModel.getModel()
         setupPlayer()
+        self.tryReconnect()
+    }
+    
+    func tryReconnect() {
+        self.showLoader()
+        viewModel.tryReconnect(success: {
+            self.hideLoader()
+            if let _ = UserDefaults.standard.string(forKey: USER_NAME), let _ = UserDefaults.standard.string(forKey: USER_IMAGE_URL) {
+//                self.getPlaylists()
+                self.getTop()
+            } else {
+                self.getMe()
+            }
+        }) { (error) in
+            self.hideLoader()
+            let mainView = SignInViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
+            UIApplication.shared.keyWindow?.rootViewController = mainView
+        }
+    }
+    
+    func getMe() {
+        self.showLoader()
+        viewModel.getMe(success: {
+            self.hideLoader()
+            self.getTop()
+//            self.getRecentlyPlayed()
+        }) { (error) in
+//            self.showErrorAlert(message: error.localizedDescription)
+        }
+    }
+    
+    func getPlaylists() {
+        self.showLoader()
+        viewModel.getPlaylists(success: {
+            self.hideLoader()
+        }) { (error) in
+            self.showErrorAlert(message: error.localizedDescription)
+        }
+    }
+    
+    func getTop() {
+        self.showLoader()
+        viewModel.getTop(success: {
+            self.hideLoader()
+            self.postTableView.reloadData()
+            self.postTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        }) { (error) in
+            self.hideLoader()
+            self.showErrorAlert(message: error.localizedDescription)
+        }
+    }
+    
+    func getRecentlyPlayed() {
+        self.showLoader()
+        viewModel.getRecently(success: {
+            self.hideLoader()
+            self.postTableView.reloadData()
+        }) { (error) in
+            self.showErrorAlert(message: error.localizedDescription)
+        }
     }
     
     func setupPlayer() {
-        self.albumImageView.image = UIImage(named: self.selectedMusic?.albumImage ?? "music_placeholder")
+        self.albumImageView.downloaded(from: selectedMusic?.album?.images?[0].url ?? "")
+        if let id = selectedMusic?.uri {
+//            self.viewModel.play(content_uri: id, success: {
+//                print("FOI")
+//            }) { (error) in
+//                self.showErrorAlert(message: error.localizedDescription)
+//            }
+            SpotifySingleton.shared().play(id: id, vc: self)
+        }
     }
     
     func setupNavigation() {
@@ -97,22 +165,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 140
-        } else if let openedRow = openedRow, indexPath == openedRow {
-            return fixHeight
+//        } else if let openedRow = openedRow, indexPath == openedRow {
+//            return fixHeight
         } else {
-            switch viewModel.getCellTypeForRow(index: indexPath.row - 1) {
-            case .music:
+//            return 0
+//            switch viewModel.getCellTypeForRow(index: indexPath.row - 1) {
+//            case .music:
                 return 90
-            case .playlist:
-                return 140
-            }
+//            case .playlist:
+//                return 140
+//            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let shareCell = self.postTableView.dequeueReusableCell(withIdentifier: SHARE_CELL, for: indexPath) as! ShareTableViewCell
-            shareCell.setup(musics: self.viewModel.model ?? [MockModel]())
+            shareCell.setup(musics: self.viewModel.getRecentlyPlayedTracks())
             shareCell.delegate = self
             return shareCell
         } else {
@@ -130,18 +199,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.viewModel.getCellTypeForRow(index: indexPath.row) == .music, indexPath.row != 0 {
+//        if self.viewModel.getCellTypeForRow(index: indexPath.row) == .music, indexPath.row != 0 {
+//            self.selectedMusic = self.viewModel.getMusicForRow(index: indexPath.row - 1)
+//            self.selectedIndex = indexPath.row
+//            self.postTableView.reloadData()
+//            setupPlayer()
+//        }
+        if indexPath.row != 0 {
             self.selectedMusic = self.viewModel.getMusicForRow(index: indexPath.row - 1)
             self.selectedIndex = indexPath.row
             self.postTableView.reloadData()
             setupPlayer()
         }
+        
     }
 }
 
 extension HomeViewController: ShareTableViewCellDelegate {
-    func didTapItem(item: MockModel?) {
-        let vc = ShareModalViewController(item: item, recommended: self.viewModel.model ?? [MockModel]())
+    func didTapItem(item: TopItem?) {
+        let vc = ShareModalViewController(item: item, recommended: self.viewModel.topResponse.items ?? [TopItem]())
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         self.navigationController?.present(vc, animated: true, completion: nil)

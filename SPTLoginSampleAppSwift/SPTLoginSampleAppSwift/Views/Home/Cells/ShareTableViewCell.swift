@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ShareTableViewCellDelegate {
-    func didTapItem(item: MockModel?)
+    func didTapItem(item: TopItem?)
 }
 
 enum SelectedSharedType {
@@ -27,7 +27,7 @@ class ShareTableViewCell: UITableViewCell {
     let MUSIC_CELL = "ShareMusicCollectionViewCell"
     var delegate: ShareTableViewCellDelegate?
     var selectedType: SelectedSharedType = .music
-    var musics = [MockModel]()
+    var musics = [TopItem]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,7 +39,7 @@ class ShareTableViewCell: UITableViewCell {
         self.collectionView.register(UINib(nibName: MUSIC_CELL, bundle: nil), forCellWithReuseIdentifier: MUSIC_CELL)
     }
     
-    func setup(musics: [MockModel]) {
+    func setup(musics: [TopItem]) {
         self.musics = musics
         setupCollectionView()
         setupViewTap()

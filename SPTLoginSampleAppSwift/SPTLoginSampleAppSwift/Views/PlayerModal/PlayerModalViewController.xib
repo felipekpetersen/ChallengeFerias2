@@ -38,7 +38,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1wE-aa-9OW" customClass="RoundedView" customModule="Synchs" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="536" width="414" height="360"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="ic7-3d-Bgw">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="ic7-3d-Bgw">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="360"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btY-aM-C1q">
@@ -165,8 +165,8 @@
     </objects>
     <resources>
         <image name="less15Music" width="31" height="31"/>
+        <image name="music_placeholder" width="133" height="133"/>
         <image name="nextMusic" width="31" height="23"/>
-        <image name="placeholder" width="1290" height="1282"/>
         <image name="playMusic" width="27" height="32"/>
         <image name="plus15Music" width="31" height="31"/>
         <image name="prevMusic" width="31" height="23"/>

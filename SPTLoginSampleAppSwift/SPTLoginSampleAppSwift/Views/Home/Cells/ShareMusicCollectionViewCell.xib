@@ -15,7 +15,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ShareMusicCollectionViewCell" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ShareMusicCollectionViewCell" customModule="Synchs" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="204" height="239"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -28,10 +28,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kOW-4N-0nZ">
                                 <rect key="frame" x="0.0" y="0.0" width="204" height="239"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="diC-rL-U7o" customClass="RoundedView" customModule="SPTLoginSampleAppSwift" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="diC-rL-U7o" customClass="RoundedView" customModule="Synchs" customModuleProvider="target">
                                         <rect key="frame" x="4" y="0.0" width="196" height="196"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-R5-9Of">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-R5-9Of">
                                                 <rect key="frame" x="0.0" y="0.0" width="196" height="196"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="4hd-R5-9Of" secondAttribute="height" multiplier="1:1" id="aMU-II-05t"/>
@@ -93,6 +93,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="placeholder" width="2049" height="1537"/>
+        <image name="music_placeholder" width="133" height="133"/>
     </resources>
 </document>

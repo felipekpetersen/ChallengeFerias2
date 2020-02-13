@@ -29,10 +29,10 @@ class ShareModalViewController: UIViewController {
     @IBOutlet weak var bottomStackConstraint: NSLayoutConstraint!
     
     let SEARCH_CELL = "SearchMusicTableViewCell"
-    var sharingItem: MockModel?
-    var recommended = [MockModel]()
+    var sharingItem: TopItem?
+    var recommended = [TopItem]()
     
-    convenience init(item: MockModel?, recommended: [MockModel]) {
+    convenience init(item: TopItem?, recommended: [TopItem]) {
         self.init()
         self.sharingItem = item
         self.recommended = recommended
@@ -71,9 +71,9 @@ class ShareModalViewController: UIViewController {
     func setupViewState() {
         if let item = sharingItem {
             self.musicView.isHidden = false
-            self.musicNameLabel.text = item.musicName
-            self.artistNameLabel.text = item.artist
-            self.albumImageView.image = UIImage(named: item.albumImage ?? "")
+            self.musicNameLabel.text = item.name
+            self.artistNameLabel.text = item.artists?[0].name
+            self.albumImageView.downloaded(from: item.album?.images?[0].url ?? "")
         } else {
             self.musicView.isHidden = true
         }

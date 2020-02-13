@@ -10,7 +10,6 @@ import Foundation
 
 class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
     
-    
     static let SpotifyClientID = "9a41d6d229754090b8cd983dacfc89e7"
     static let SpotifyRedirectURI = URL(string: "syncs-login://callback")!
     
@@ -21,11 +20,12 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
     
     let tokenSwapURL = URL(string: "http://fepetersenspotify.herokuapp.com/api/token")
     let tokenRefreshURL = URL(string: "http://fepetersenspotify.herokuapp.com/api/refresh_token")
+    var playUri = ""
     
     lazy var sessionManager: SPTSessionManager = {
         self.configuration.tokenSwapURL = tokenSwapURL
         self.configuration.tokenRefreshURL = tokenRefreshURL
-        self.configuration.playURI = ""
+        self.configuration.playURI = self.playUri
         let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
         manager.delegate = self
         return manager
@@ -38,7 +38,8 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
     }()
 
     fileprivate var lastPlayerState: SPTAppRemotePlayerState?
-
+    var player: SPTAppRemotePlayerAPI?
+    
     private override init() {
     }
 
@@ -55,7 +56,7 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
     
     //MARK:- Actions
     func connect(vc: UIViewController) {
-        let scope: SPTScope = [.appRemoteControl, .playlistModifyPublic, .playlistReadCollaborative, .playlistReadPrivate, .playlistModifyPrivate, .userFollowRead]
+        let scope: SPTScope = [.appRemoteControl, .playlistModifyPublic, .playlistReadCollaborative, .playlistReadPrivate, .playlistModifyPrivate, .userFollowRead, .userReadRecentlyPlayed, .userTopRead, .userModifyPlaybackState]
         if #available(iOS 11, *) {
             self.sessionManager.initiateSession(with: scope, options: .default)
         } else {
@@ -83,18 +84,64 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
         NotificationCenter.default.addObserver(vc, selector: function, name: .didFailWith, object: nil)
     }
     
-    //MARK:- Player
-    
+    //MARK:- Access
     func getAccessToken() -> String {
         return appRemote.connectionParameters.accessToken ?? ""
     }
     
-    func getRefreshToken() -> String {
-        return UserDefaults.standard.string(forKey: "REFRESH") ?? ""
+    func setAcessToken(access: String?) {
+        appRemote.connectionParameters.accessToken = access
     }
     
+    func cleanRefreshToken() {
+        UserDefaults.standard.set(nil, forKey: REFRESH)
+    }
+    
+    func setNewRefreshToken(refreshToken: String) {
+        UserDefaults.standard.set(refreshToken, forKey: REFRESH)
+    }
+    
+    func getRefreshToken() -> String? {
+        if let refreshToken = UserDefaults.standard.string(forKey: REFRESH) {
+            return refreshToken
+        } else {
+            return nil
+        }
+    }
+    
+    //MARK:-Player
     func playerIsPaused() -> Bool {
         return lastPlayerState?.isPaused ?? true
+    }
+    
+    func play(id: String, vc: UIViewController) {
+        self.playUri = id
+        if appRemote.isConnected{
+            appRemote.playerAPI?.play(playUri, callback: { (success, error) in
+                
+            })
+        } else {
+            self.connect(vc: vc)
+        }
+        
+//        configuration.playURI = id
+//        configuration.tokenSwapURL = tokenSwapURL
+//        configuration.tokenRefreshURL = tokenRefreshURL
+        
+////        configuration.
+//        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
+//        appRemote.delegate = self
+//        appRemote.connect()
+//        appRemote.authorizeAndPlayURI(id)
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: UInt64(1.5))) {
+//            appRemote.connectionParameters.accessToken = SessionManager.session?.accessToken
+//            self.appRemote.connect()
+//        }
+//        appRemote.playerAPI?.play(id, callback: { (success, error) in
+//            print("")
+//        })
+//        appRemote.authorizeAndPlayURI(id)
+//
     }
     
     func fetchArtwork(for track:SPTAppRemoteTrack) -> UIImage {
@@ -123,7 +170,7 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
         print("conectou nessa budega")
         appRemote.connectionParameters.accessToken = session.accessToken
-        UserDefaults.standard.set(session.refreshToken, forKey: "REFRESH")
+        UserDefaults.standard.set(session.refreshToken, forKey: REFRESH)
         appRemote.connect()
         
     }

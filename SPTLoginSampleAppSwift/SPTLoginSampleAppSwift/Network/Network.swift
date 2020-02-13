@@ -27,7 +27,10 @@ public class Network {
         AF.request(router.url, method: router.method, parameters: parameters, encoding: encoding, headers: router.fullHeaders)
         .validate()
         .responseDecodable { (response: AFDataResponse<D>) in
-            
+            print(response.request)
+            print(response.description)
+            print(response.response)
+            print(response.error?.errorDescription)
             if let value = response.value {
                 completion(.sucess(model: value))
             } else {

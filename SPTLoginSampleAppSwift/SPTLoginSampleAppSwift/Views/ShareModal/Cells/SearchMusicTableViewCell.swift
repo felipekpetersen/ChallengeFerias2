@@ -20,10 +20,11 @@ class SearchMusicTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func setup(music: MockModel) {
-        self.musicTitleLabel.text = music.musicName
-        self.artistNameLabel.text = music.artist
-        self.albumImageView.image = UIImage(named: music.albumImage ?? "")
+    func setup(music: TopItem) {
+        self.musicTitleLabel.text = music.name
+        self.artistNameLabel.text = music.artists?[0].name
+        self.albumImageView.image = UIImage(named: "placeholder")
+        self.albumImageView.downloaded(from: music.album?.images?[0].url ?? "")
     }
     
 }

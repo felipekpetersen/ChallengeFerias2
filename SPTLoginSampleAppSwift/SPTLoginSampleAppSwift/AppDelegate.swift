@@ -22,10 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        enterApp()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewController
-        window?.makeKeyAndVisible()
+        if let _ = SpotifySingleton.shared().getRefreshToken() {
+            enterApp()
+        } else {
+            window = UIWindow(frame: UIScreen.main.bounds)
+            window?.rootViewController = rootViewController
+            window?.makeKeyAndVisible()
+        }
         return true
     }
 

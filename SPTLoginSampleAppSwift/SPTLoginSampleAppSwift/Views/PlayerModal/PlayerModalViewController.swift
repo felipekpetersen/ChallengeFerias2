@@ -18,9 +18,9 @@ class PlayerModalViewController: UIViewController {
     
     
     let colors = Colors()
-    var music = MockModel()
+    var music = TopItem()
     
-    convenience init(music: MockModel) {
+    convenience init(music: TopItem) {
         self.init()
         self.music = music
     }
@@ -40,9 +40,9 @@ class PlayerModalViewController: UIViewController {
     }
     
     func setupView() {
-        self.musicNameLabel.text = music.musicName
-        self.artirstNameLabel.text = music.artist
-        self.backgroundImageView.image = UIImage(named: music.albumImage ?? "")
+        self.musicNameLabel.text = music.name
+        self.artirstNameLabel.text = music.artists?[0].name
+        self.backgroundImageView.downloaded(from: music.album?.images?[0].url ?? "")
     }
     
     @IBAction func didTapPrevButton(_ sender: Any) {

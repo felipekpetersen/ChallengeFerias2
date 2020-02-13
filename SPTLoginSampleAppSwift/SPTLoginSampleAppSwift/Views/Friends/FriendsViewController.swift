@@ -27,6 +27,13 @@ class FriendsViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         self.qrImageView.image = QRCodeGenerator.qrImage(from: "osijhda0932u")
+        setupView()
+    }
+    
+    func setupView() {
+        self.userImageView.image = UIImage(named: "profile_placeholder")
+        self.userImageView.downloaded(from: UserDefaults.standard.string(forKey: USER_IMAGE_URL) ?? "")
+        self.userNameLabel.text = UserDefaults.standard.string(forKey: USER_NAME)
     }
     
     func setupTableView() {

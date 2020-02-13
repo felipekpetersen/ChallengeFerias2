@@ -32,12 +32,13 @@ class MusicTableViewCell: UITableViewCell {
         self.genderCollectionView.register(UINib(nibName: GENDER_CELL, bundle: nil), forCellWithReuseIdentifier: GENDER_CELL)
     }
     
-    func setup(music: MockModel, isSelected: Bool) {
-        self.musicTitleLabel.text = music.musicName
-        self.artistLabel.text = music.artist
+    func setup(music: TopItem, isSelected: Bool) {
+        self.musicTitleLabel.text = music.name
+        self.artistLabel.text = music.artists?[0].name
         self.userNameLabel.text = "Felipe Kaça"
-        self.albumImageView.image = UIImage(named: music.albumImage ?? "")
-        self.genders = music.gender ?? [String]()
+        self.albumImageView.image = UIImage(named: "music_placeholder")
+        self.albumImageView.downloaded(from: music.album?.images?[0].url ?? "")
+        self.genders = music.artists?[0].genres ?? [String]()
         if isSelected {
             self.musicTitleLabel.textColor = UIColor().hexStringToUIColor(hex: "#C9484F")
             self.artistLabel.textColor = UIColor().hexStringToUIColor(hex: "#C9484F")
