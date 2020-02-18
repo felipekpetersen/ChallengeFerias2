@@ -146,8 +146,8 @@ class HomeViewModel {
         return topResponse.items ?? [MusicItem]()
     }
     
-    func getPlaylists() -> [Item] {
-        return playlistResponse.items ?? [Item]()
+    func getPlaylists() -> [MusicItem] {
+        return playlistResponse.items ?? [MusicItem]()
     }
     
 }

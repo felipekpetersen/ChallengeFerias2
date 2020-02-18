@@ -226,8 +226,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension HomeViewController: ShareTableViewCellDelegate {
-    func didTapItem(item playlist: Item?) {
-        let vc = ShareModalViewController(item: playlist, recommended: self.viewModel.playlistResponse.items ?? [Item](), state: .fromPlaylist)
+    func didTapItem(item playlist: MusicItem?, isMusic: Bool) {
+        let vc = ShareModalViewController(item: playlist, recommended: self.viewModel.playlistResponse.items ?? [MusicItem](), state: isMusic ? .fromMusic : .fromPlaylist)
         pushTo(vc: vc)
     }
     
@@ -236,10 +236,10 @@ extension HomeViewController: ShareTableViewCellDelegate {
         pushTo(vc: vc)
     }
     
-    func didTapItem(item: MusicItem?) {
-        let vc = ShareModalViewController(item: item, recommended: self.viewModel.topResponse.items ?? [MusicItem](), state: .fromMusic)
-        pushTo(vc: vc)
-    }
+//    func didTapItem(item: MusicItem?) {
+//        let vc = ShareModalViewController(item: item, recommended: self.viewModel.topResponse.items ?? [MusicItem](), state: .fromMusic)
+//        pushTo(vc: vc)
+//    }
 }
 
 extension HomeViewController: PlaylistTableViewCellDelegate {

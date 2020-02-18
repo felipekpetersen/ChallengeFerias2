@@ -24,7 +24,7 @@ class SearchMusicTableViewCell: UITableViewCell {
         self.musicTitleLabel.text = music.name
         self.artistNameLabel.text = music.artists?[0].name
         self.albumImageView.image = UIImage(named: "placeholder")
-        self.albumImageView.downloaded(from: music.album?.images?[0].url ?? "")
+        self.albumImageView.downloaded(from: music.album?.images?[0].url ?? music.images?[0].url ?? "")
     }
     
 }

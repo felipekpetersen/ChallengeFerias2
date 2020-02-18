@@ -9,8 +9,8 @@
 import UIKit
 
 protocol ShareTableViewCellDelegate {
-    func didTapItem(item music: MusicItem?)
-    func didTapItem(item playlist: Item?)
+    func didTapItem(item: MusicItem?, isMusic: Bool)
+//    func didTapItem(item playlist: MusicItem?)
     func didTapSearch()
 }
 
@@ -30,7 +30,7 @@ class ShareTableViewCell: UITableViewCell {
     var delegate: ShareTableViewCellDelegate?
     var selectedType: SelectedSharedType = .music
     var musics = [MusicItem]()
-    var playlists = [Item]()
+    var playlists = [MusicItem]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,7 +43,7 @@ class ShareTableViewCell: UITableViewCell {
         self.collectionView.register(UINib(nibName: MUSIC_CELL, bundle: nil), forCellWithReuseIdentifier: MUSIC_CELL)
     }
     
-    func setup(musics: [MusicItem], playlists: [Item]) {
+    func setup(musics: [MusicItem], playlists: [MusicItem]) {
         self.musics = musics
         self.playlists = playlists
         setupCollectionView()
@@ -107,9 +107,9 @@ extension ShareTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectedType == .music {
-            delegate?.didTapItem(item: musics[indexPath.row])
+            delegate?.didTapItem(item: musics[indexPath.row], isMusic: true)
         } else {
-            delegate?.didTapItem(item: playlists[indexPath.row])
+            delegate?.didTapItem(item: playlists[indexPath.row], isMusic: false)
         }
     }
     

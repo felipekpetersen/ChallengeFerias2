@@ -33,8 +33,8 @@ class ShareModalViewController: UIViewController {
     let SEARCH_CELL = "SearchMusicTableViewCell"
     var sharingMusicItem: MusicItem?
     var recommendedMusic = [MusicItem]()
-    var sharingPlaylistItem: Item?
-    var recommendedPlaylist = [Item]()
+    var sharingPlaylistItem: MusicItem?
+    var recommendedPlaylist = [MusicItem]()
     var sharingSearchItem: MusicItem?
     var state: ShareModalViewControllerState?
     var viewModel = ShareModalViewModel()
@@ -42,16 +42,20 @@ class ShareModalViewController: UIViewController {
     convenience init(item: MusicItem?, recommended: [MusicItem], state: ShareModalViewControllerState) {
         self.init()
         self.sharingMusicItem = item
-        self.recommendedMusic = recommended
+        if state == .fromMusic {
+            self.recommendedMusic = recommended
+        } else if state == .fromPlaylist {
+            self.recommendedPlaylist = recommended
+        }
         self.state = state
     }
     
-    convenience init(item playlist: Item?, recommended: [Item], state: ShareModalViewControllerState) {
-        self.init()
-        self.sharingPlaylistItem = playlist
-        self.recommendedPlaylist = recommended
-        self.state = state 
-    }
+//    convenience init(item playlist: MusicItem?, recommended: [MusicItem], state: ShareModalViewControllerState) {
+//        self.init()
+//        self.sharingPlaylistItem = playlist
+//        self.recommendedPlaylist = recommended
+//        self.state = state 
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,17 +97,17 @@ class ShareModalViewController: UIViewController {
             self.musicView.isHidden = false
             self.musicNameLabel.text = item.name
             self.artistNameLabel.text = item.artists?[0].name
-            self.albumImageView.downloaded(from: item.album?.images?[0].url ?? "")
+            self.albumImageView.downloaded(from: item.album?.images?[0].url ?? item.images?[0].url ?? "")
         } else if let item = sharingPlaylistItem {
             self.musicView.isHidden = false
             self.musicNameLabel.text = item.name
             self.artistNameLabel.text = item.owner?.display_name
-            self.albumImageView.downloaded(from: item.images?[0].url ?? "")
+            self.albumImageView.downloaded(from: item.album?.images?[0].url ?? item.images?[0].url ?? "")
         } else if let item = sharingSearchItem{
             self.musicView.isHidden = false
             self.musicNameLabel.text = item.name
             self.artistNameLabel.text = item.artists?[0].name
-            self.albumImageView.downloaded(from: item.album?.images?[0].url ?? "")
+            self.albumImageView.downloaded(from: item.album?.images?[0].url ?? item.images?[0].url ?? "")
         }
     }
 }
@@ -144,8 +148,11 @@ extension ShareModalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: SEARCH_CELL, for: indexPath) as! SearchMusicTableViewCell
         switch self.state {
-        case .fromMusic, .fromPlaylist, .fromSearch:
+        case .fromMusic,  .fromSearch:
             cell.setup(music: recommendedMusic[indexPath.row])
+        case .fromPlaylist:
+            cell.setup(music: recommendedPlaylist[indexPath.row])
+
         default:
             cell.setup(music: self.viewModel.getSearchForRow(index: indexPath.row))
         }

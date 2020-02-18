@@ -12,42 +12,42 @@ import Foundation
 // MARK: - PlaylistResponse
 struct PlaylistResponse: Codable {
     var href: String?
-    var items: [Item]?
+    var items: [MusicItem]?
     var limit: Int?
     var next: String?
     var offset: Int?
     var previous: String?
     var total: Int?
 }
-
-// MARK: - Item
-struct Item: Codable {
-    var collaborative: Bool?
-    var item_description: String?
-    var external_urls: ExternalUrls?
-    var href: String?
-    var id: String?
-    var images: [Image]?
-    var name: String?
-    var owner: Owner?
-    var primary_color: JSONNull?
-    var item_public: Bool?
-    var snapshotID: String?
-    var tracks: Tracks?
-    var type: ItemType?
-    var uri: String?
-
-    enum CodingKeys: String, CodingKey {
-        case collaborative
-        case item_description
-        case external_urls
-        case href, id, images, name, owner
-        case primary_color
-        case item_public
-        case snapshotID
-        case tracks, type, uri
-    }
-}
+//
+//// MARK: - Item
+//struct MusicItem: Codable {
+//    var collaborative: Bool?
+//    var item_description: String?
+//    var external_urls: ExternalUrls?
+//    var href: String?
+//    var id: String?
+//    var images: [Image]?
+//    var name: String?
+//    var owner: Owner?
+//    var primary_color: JSONNull?
+//    var item_public: Bool?
+//    var snapshotID: String?
+//    var tracks: Tracks?
+//    var type: ItemType?
+//    var uri: String?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case collaborative
+//        case item_description
+//        case external_urls
+//        case href, id, images, name, owner
+//        case primary_color
+//        case item_public
+//        case snapshotID
+//        case tracks, type, uri
+//    }
+//}
 
 // MARK: - ExternalUrls
 struct ExternalUrls: Codable {
@@ -136,6 +136,7 @@ struct MusicItem: Codable {
         case previewURL
         case trackNumber
         case type, uri
+        case images
 //        case owner, images
 //        case colaborative
     }
