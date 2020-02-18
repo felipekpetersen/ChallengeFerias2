@@ -92,7 +92,7 @@ enum ItemType: String, Codable {
 }
 // MARK: - Toptracks
 struct ToptracksResponse: Codable {
-    var items: [TopItem]?
+    var items: [MusicItem]?
     var total, limit, offset: Int?
     var href: String?
     var previous: JSONNull?
@@ -100,7 +100,7 @@ struct ToptracksResponse: Codable {
 }
 
 // MARK: - Item
-struct TopItem: Codable {
+struct MusicItem: Codable {
     var album: TopAlbum?
     var artists: [TopArtist]?
     var availableMarkets: [String]?
@@ -214,6 +214,7 @@ struct ExternalIDS: Codable {
 
 enum TopItemType: String, Codable {
     case track = "track"
+    case playlist = "playlist"
 }
 
 

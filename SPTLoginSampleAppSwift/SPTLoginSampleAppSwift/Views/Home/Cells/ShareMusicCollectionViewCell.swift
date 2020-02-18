@@ -18,10 +18,16 @@ class ShareMusicCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func setup(music: TopItem) {
+    func setup(of music: MusicItem) {
         self.titleLabel.text = music.name
         self.albumImageView.image = UIImage(named: "music_placeholder")
         self.albumImageView.downloaded(from: music.album?.images?[0].url ?? "")
+    }
+    
+    func setup(of playlist: Item) {
+        self.titleLabel.text = playlist.name
+        self.albumImageView.image = UIImage(named: "music_placeholder")
+        self.albumImageView.downloaded(from: playlist.images?[0].url ?? "")
     }
 
 }

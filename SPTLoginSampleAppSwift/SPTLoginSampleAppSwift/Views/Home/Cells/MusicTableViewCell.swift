@@ -23,7 +23,7 @@ class MusicTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCollectionView()
-        // Initialization code
+        
     }
     
     func setupCollectionView() {
@@ -32,7 +32,7 @@ class MusicTableViewCell: UITableViewCell {
         self.genderCollectionView.register(UINib(nibName: GENDER_CELL, bundle: nil), forCellWithReuseIdentifier: GENDER_CELL)
     }
     
-    func setup(music: TopItem, isSelected: Bool) {
+    func setup(music: MusicItem, isSelected: Bool) {
         self.musicTitleLabel.text = music.name
         self.artistLabel.text = music.artists?[0].name
         self.userNameLabel.text = "Felipe Kaça"

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
     
@@ -123,25 +124,7 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
         } else {
             self.connect(vc: vc)
         }
-        
-//        configuration.playURI = id
-//        configuration.tokenSwapURL = tokenSwapURL
-//        configuration.tokenRefreshURL = tokenRefreshURL
-        
-////        configuration.
-//        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
-//        appRemote.delegate = self
-//        appRemote.connect()
-//        appRemote.authorizeAndPlayURI(id)
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: UInt64(1.5))) {
-//            appRemote.connectionParameters.accessToken = SessionManager.session?.accessToken
-//            self.appRemote.connect()
-//        }
-//        appRemote.playerAPI?.play(id, callback: { (success, error) in
-//            print("")
-//        })
-//        appRemote.authorizeAndPlayURI(id)
-//
+
     }
     
     func fetchArtwork(for track:SPTAppRemoteTrack) -> UIImage {
@@ -158,6 +141,21 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
     
     func getMusic() {
 //        self.lastPlayerState?.track.artist.name
+    }
+    
+    //MARK:- Search
+    func getSearch(search: String, success: @escaping (SearchResponse) -> (), erro: @escaping (Error) -> ()) {
+        var params = Parameters()
+        params = ["auth" : SpotifySingleton.shared().getAccessToken(), "q": search, "type": "track,playlist"]
+        Network.shared.request(SearchRouter.getSearch, parameters: params, model: SearchResponse.self, encoding: URLEncoding.queryString) { result in
+            
+            switch result {
+            case .sucess(let list): success(list)
+                break
+            case .failure(let error): erro(error)
+                break
+            }
+        }
     }
     
     

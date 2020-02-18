@@ -19,6 +19,7 @@ class HomeViewModel {
 //    var model: [MockModel]?
     var recentlyPlayed = RecentlyPlayed()
     var topResponse = ToptracksResponse()
+    var playlistResponse = PlaylistResponse()
     
     func tryReconnect(success: @escaping () -> (), erro: @escaping (Error) -> ()) {
         var params = Parameters()
@@ -63,6 +64,7 @@ class HomeViewModel {
             
             switch result {
             case .sucess(let list):
+                self.playlistResponse = list
                 success()
                 break
             case .failure(let error): erro(error)
@@ -128,8 +130,8 @@ class HomeViewModel {
         return topResponse.items?.count ?? 0
     }
 
-    func getMusicForRow(index: Int) -> TopItem {
-        return topResponse.items?[index] ?? TopItem()
+    func getMusicForRow(index: Int) -> MusicItem {
+        return topResponse.items?[index] ?? MusicItem()
     }
     
 //    func getCellTypeForRow(index: Int) -> HomeCellType {
@@ -140,8 +142,12 @@ class HomeViewModel {
 //        return recentlyPlayed.items?.count ?? 0
 //    }
     
-    func getRecentlyPlayedTracks() -> [TopItem] {
-        return topResponse.items ?? [TopItem]()
+    func getRecentlyPlayedTracks() -> [MusicItem] {
+        return topResponse.items ?? [MusicItem]()
+    }
+    
+    func getPlaylists() -> [Item] {
+        return playlistResponse.items ?? [Item]()
     }
     
 }

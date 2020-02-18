@@ -9,7 +9,9 @@
 import UIKit
 
 protocol ShareTableViewCellDelegate {
-    func didTapItem(item: TopItem?)
+    func didTapItem(item music: MusicItem?)
+    func didTapItem(item playlist: Item?)
+    func didTapSearch()
 }
 
 enum SelectedSharedType {
@@ -27,10 +29,12 @@ class ShareTableViewCell: UITableViewCell {
     let MUSIC_CELL = "ShareMusicCollectionViewCell"
     var delegate: ShareTableViewCellDelegate?
     var selectedType: SelectedSharedType = .music
-    var musics = [TopItem]()
+    var musics = [MusicItem]()
+    var playlists = [Item]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.musicView.backgroundColor = .red
     }
     
     func setupCollectionView() {
@@ -39,10 +43,12 @@ class ShareTableViewCell: UITableViewCell {
         self.collectionView.register(UINib(nibName: MUSIC_CELL, bundle: nil), forCellWithReuseIdentifier: MUSIC_CELL)
     }
     
-    func setup(musics: [TopItem]) {
+    func setup(musics: [MusicItem], playlists: [Item]) {
         self.musics = musics
+        self.playlists = playlists
         setupCollectionView()
         setupViewTap()
+        self.collectionView.reloadData()
     }
     
     func setupViewTap() {
@@ -68,17 +74,21 @@ class ShareTableViewCell: UITableViewCell {
         self.playlistView.backgroundColor = UIColor().hexStringToUIColor(hex: "#4a4a4a")
         sender?.view?.backgroundColor = .red
         self.selectedType = sender?.view == musicView ? .music : .playlist
+        self.collectionView.reloadData()
     }
     
     @objc func didTapSearchView() {
-        delegate?.didTapItem(item: nil)
+        delegate?.didTapSearch()
     }
 }
 
 extension ShareTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return musics.count
+        if selectedType == .music {
+            return musics.count
+        }
+        return playlists.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -87,12 +97,20 @@ extension ShareTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MUSIC_CELL, for: indexPath) as? ShareMusicCollectionViewCell
-        cell?.setup(music: self.musics[indexPath.row])
+        if selectedType == .music {
+            cell?.setup(of: self.musics[indexPath.row])
+        } else {
+            cell?.setup(of: self.playlists[indexPath.row])
+        }
         return cell ?? UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didTapItem(item: musics[indexPath.row])
+        if selectedType == .music {
+            delegate?.didTapItem(item: musics[indexPath.row])
+        } else {
+            delegate?.didTapItem(item: playlists[indexPath.row])
+        }
     }
     
     

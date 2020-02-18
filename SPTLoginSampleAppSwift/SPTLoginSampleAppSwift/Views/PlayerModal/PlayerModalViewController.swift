@@ -18,9 +18,9 @@ class PlayerModalViewController: UIViewController {
     
     
     let colors = Colors()
-    var music = TopItem()
+    var music = MusicItem()
     
-    convenience init(music: TopItem) {
+    convenience init(music: MusicItem) {
         self.init()
         self.music = music
     }

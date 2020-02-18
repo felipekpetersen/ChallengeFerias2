@@ -20,7 +20,7 @@ class SearchMusicTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func setup(music: TopItem) {
+    func setup(music: MusicItem) {
         self.musicTitleLabel.text = music.name
         self.artistNameLabel.text = music.artists?[0].name
         self.albumImageView.image = UIImage(named: "placeholder")

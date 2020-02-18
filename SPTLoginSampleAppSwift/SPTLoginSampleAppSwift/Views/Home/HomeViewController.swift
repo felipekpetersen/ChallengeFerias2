@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     lazy var fixHeight: CGFloat = CGFloat(140 + HomeViewController.numberOfCellsPlaylist * 36)
     var openedRow: IndexPath?
     var viewModel = HomeViewModel()
-    var selectedMusic: TopItem?
+    var selectedMusic: MusicItem?
     var selectedIndex: Int?
     
     override func viewDidLoad() {
@@ -42,6 +42,7 @@ class HomeViewController: UIViewController {
             if let _ = UserDefaults.standard.string(forKey: USER_NAME), let _ = UserDefaults.standard.string(forKey: USER_IMAGE_URL) {
 //                self.getPlaylists()
                 self.getTop()
+                self.getPlaylists()
             } else {
                 self.getMe()
             }
@@ -57,6 +58,7 @@ class HomeViewController: UIViewController {
         viewModel.getMe(success: {
             self.hideLoader()
             self.getTop()
+            self.getPlaylists()
 //            self.getRecentlyPlayed()
         }) { (error) in
 //            self.showErrorAlert(message: error.localizedDescription)
@@ -67,6 +69,7 @@ class HomeViewController: UIViewController {
         self.showLoader()
         viewModel.getPlaylists(success: {
             self.hideLoader()
+            self.postTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
         }) { (error) in
             self.showErrorAlert(message: error.localizedDescription)
         }
@@ -181,7 +184,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let shareCell = self.postTableView.dequeueReusableCell(withIdentifier: SHARE_CELL, for: indexPath) as! ShareTableViewCell
-            shareCell.setup(musics: self.viewModel.getRecentlyPlayedTracks())
+            shareCell.setup(musics: self.viewModel.getRecentlyPlayedTracks(), playlists: self.viewModel.getPlaylists())
             shareCell.delegate = self
             return shareCell
         } else {
@@ -216,8 +219,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension HomeViewController: ShareTableViewCellDelegate {
-    func didTapItem(item: TopItem?) {
-        let vc = ShareModalViewController(item: item, recommended: self.viewModel.topResponse.items ?? [TopItem]())
+    func didTapItem(item playlist: Item?) {
+        let vc = ShareModalViewController(item: playlist, recommended: self.viewModel.playlistResponse.items ?? [Item](), state: .fromPlaylist)
+        pushTo(vc: vc)
+    }
+    
+    func didTapSearch() {
+        let vc = ShareModalViewController(item: nil, recommended: self.viewModel.topResponse.items ?? [MusicItem](), state: .fromSearch)
+        pushTo(vc: vc)
+    }
+    
+    func didTapItem(item: MusicItem?) {
+        let vc = ShareModalViewController(item: item, recommended: self.viewModel.topResponse.items ?? [MusicItem](), state: .fromMusic)
+        pushTo(vc: vc)
+    }
+    
+    func pushTo(vc: UIViewController) {
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         self.navigationController?.present(vc, animated: true, completion: nil)
