@@ -12,6 +12,7 @@ enum ShareModalViewControllerState {
     case fromSearch
     case fromMusic
     case fromPlaylist
+    case didSearch
 }
 
 class ShareModalViewController: UIViewController {
@@ -34,6 +35,7 @@ class ShareModalViewController: UIViewController {
     var recommendedMusic = [MusicItem]()
     var sharingPlaylistItem: Item?
     var recommendedPlaylist = [Item]()
+    var sharingSearchItem: MusicItem?
     var state: ShareModalViewControllerState?
     var viewModel = ShareModalViewModel()
     
@@ -57,6 +59,11 @@ class ShareModalViewController: UIViewController {
         setupViewState()
         setupViewTap()
         self.searchBar.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.modalHeight.constant = self.view.frame.height - 80
     }
     
     func setupTableView() {
@@ -92,8 +99,11 @@ class ShareModalViewController: UIViewController {
             self.musicNameLabel.text = item.name
             self.artistNameLabel.text = item.owner?.display_name
             self.albumImageView.downloaded(from: item.images?[0].url ?? "")
-        } else {
-            self.musicView.isHidden = true
+        } else if let item = sharingSearchItem{
+            self.musicView.isHidden = false
+            self.musicNameLabel.text = item.name
+            self.artistNameLabel.text = item.artists?[0].name
+            self.albumImageView.downloaded(from: item.album?.images?[0].url ?? "")
         }
     }
 }
@@ -102,9 +112,9 @@ extension ShareModalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch state {
-        case .fromMusic:
+        case .fromMusic, .fromSearch:
             return recommendedMusic.count
-        case .fromSearch:
+        case .didSearch:
             return self.viewModel.getNumberOfRowsForSearch()
         default:
             return recommendedPlaylist.count
@@ -122,7 +132,7 @@ extension ShareModalViewController: UITableViewDelegate, UITableViewDataSource {
         label.font = UIFont(name: "SourceSansPro-Semibold", size: 18)
         label.textColor = .white
         switch self.state {
-        case .fromMusic, .fromPlaylist:
+        case .fromMusic, .fromPlaylist, .fromSearch:
             label.text = "Recommended"
         default:
             label.text = "Results"
@@ -134,7 +144,7 @@ extension ShareModalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: SEARCH_CELL, for: indexPath) as! SearchMusicTableViewCell
         switch self.state {
-        case .fromMusic, .fromPlaylist:
+        case .fromMusic, .fromPlaylist, .fromSearch:
             cell.setup(music: recommendedMusic[indexPath.row])
         default:
             cell.setup(music: self.viewModel.getSearchForRow(index: indexPath.row))
@@ -143,11 +153,19 @@ extension ShareModalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.sharingMusicItem = nil
+        self.sharingPlaylistItem = nil
+        self.sharingSearchItem = nil
+        
         switch state {
         case .fromMusic, .fromSearch:
             self.sharingMusicItem = recommendedMusic[indexPath.row]
-        default:
+        case .fromPlaylist:
             self.sharingPlaylistItem = recommendedPlaylist[indexPath.row]
+        case .didSearch:
+            self.sharingSearchItem = self.viewModel.getSearchForRow(index: indexPath.row)
+        case .none:
+            break
         }
         self.view.endEditing(true)
         self.setupViewState()
@@ -157,7 +175,6 @@ extension ShareModalViewController: UITableViewDelegate, UITableViewDataSource {
 extension ShareModalViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         UIView.animate(withDuration: 0.4) {
-            self.modalHeight.constant = self.view.frame.height - 80
             self.bottomStackConstraint.constant = 300
             self.view.layoutIfNeeded()
         }
@@ -166,7 +183,7 @@ extension ShareModalViewController: UISearchBarDelegate {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         UIView.animate(withDuration: 0.4) {
-            self.modalHeight.constant = 360
+//            self.modalHeight.constant = 360
             self.bottomStackConstraint.constant = 0
             self.view.layoutIfNeeded()
         }
@@ -174,12 +191,15 @@ extension ShareModalViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let search = searchBar.text {
+            self.showLoader()
             SpotifySingleton.shared().getSearch(search: search, success: { (response) in
                 self.viewModel.searchResult = response
-                self.state = .fromSearch
+                self.state = .didSearch
                 self.tableView.reloadData()
+                self.hideLoader()
             }) { (error) in
                 print("nao foi")
+                self.hideLoader()
             }
 
         }

@@ -104,6 +104,7 @@ struct MusicItem: Codable {
     var album: TopAlbum?
     var artists: [TopArtist]?
     var availableMarkets: [String]?
+    var images: [Image]?
     var discNumber, durationMS: Int?
     var explicit: Bool?
     var externalIDS: ExternalIDS?
@@ -117,6 +118,9 @@ struct MusicItem: Codable {
     var trackNumber: Int?
     var type: TopItemType?
     var uri: String?
+    var collaborative: Bool?
+    var owner: Owner?
+//    var snapshotID: String?
 
     enum CodingKeys: String, CodingKey {
         case album, artists
@@ -132,6 +136,8 @@ struct MusicItem: Codable {
         case previewURL
         case trackNumber
         case type, uri
+//        case owner, images
+//        case colaborative
     }
 }
 

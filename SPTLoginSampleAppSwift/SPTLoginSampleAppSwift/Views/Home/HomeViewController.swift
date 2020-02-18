@@ -141,6 +141,13 @@ class HomeViewController: UIViewController {
         self.playerView.addGestureRecognizer(playerTap)
     }
     
+    func pushTo(vc: UIViewController) {
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        self.navigationController?.present(vc, animated: true, completion: nil)
+        
+    }
+    
     @objc func didTapPlayer() {
         if let music = selectedMusic {
             let vc = PlayerModalViewController(music: music)
@@ -232,12 +239,6 @@ extension HomeViewController: ShareTableViewCellDelegate {
     func didTapItem(item: MusicItem?) {
         let vc = ShareModalViewController(item: item, recommended: self.viewModel.topResponse.items ?? [MusicItem](), state: .fromMusic)
         pushTo(vc: vc)
-    }
-    
-    func pushTo(vc: UIViewController) {
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.modalTransitionStyle = .crossDissolve
-        self.navigationController?.present(vc, animated: true, completion: nil)
     }
 }
 
