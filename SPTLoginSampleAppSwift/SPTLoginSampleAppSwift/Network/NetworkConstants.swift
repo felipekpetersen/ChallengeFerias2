@@ -18,7 +18,7 @@ let GET_PLAYLISTS = "/v1/me/playlists"
 let GET_RECENTLY_PLAYED = "/v1/me/player/recently-played"
 let GET_TOP_TRACKS = "/v1/me/top/tracks"
 let PUT_PLAY = "/v1/me/player/play"
-
+let GET_PLAYLIST_TRACKS = "/v1/playlists/tracks"
 //SEARCH
 let GET_SEARCH = "/v1/search"
 

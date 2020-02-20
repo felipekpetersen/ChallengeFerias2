@@ -17,12 +17,13 @@ class HomeViewController: UIViewController {
     let MUSIC_CELL = "MusicTableViewCell"
     let PLAYLIST_CELL = "PlaylistTableViewCell"
     let SHARE_CELL = "ShareTableViewCell"
-    static let numberOfCellsPlaylist = 10
-    lazy var fixHeight: CGFloat = CGFloat(140 + HomeViewController.numberOfCellsPlaylist * 36)
+    var numberOfCellsPlaylist = 0
+    var fixHeight: CGFloat?
     var openedRow: IndexPath?
     var viewModel = HomeViewModel()
     var selectedMusic: MusicItem?
     var selectedIndex: Int?
+    var selectedIndexForPlaylist: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class HomeViewController: UIViewController {
         setupShadowView()
         setupViewTaps()
 //        self.viewModel.getModel()
+        self.reloadSizeForPlaylist(count: 0)
         setupPlayer()
         self.tryReconnect()
     }
@@ -69,7 +71,7 @@ class HomeViewController: UIViewController {
         self.showLoader()
         viewModel.getPlaylists(success: {
             self.hideLoader()
-            self.postTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+            self.postTableView.reloadData()
         }) { (error) in
             self.showErrorAlert(message: error.localizedDescription)
         }
@@ -79,23 +81,23 @@ class HomeViewController: UIViewController {
         self.showLoader()
         viewModel.getTop(success: {
             self.hideLoader()
-            self.postTableView.reloadData()
+//            self.postTableView.reloadData()
             self.postTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
         }) { (error) in
             self.hideLoader()
             self.showErrorAlert(message: error.localizedDescription)
         }
     }
-    
-    func getRecentlyPlayed() {
-        self.showLoader()
-        viewModel.getRecently(success: {
-            self.hideLoader()
-            self.postTableView.reloadData()
-        }) { (error) in
-            self.showErrorAlert(message: error.localizedDescription)
-        }
-    }
+//
+//    func getRecentlyPlayed() {
+//        self.showLoader()
+//        viewModel.getRecently(success: {
+//            self.hideLoader()
+////            self.postTableView.reloadData()
+//        }) { (error) in
+//            self.showErrorAlert(message: error.localizedDescription)
+//        }
+//    }
     
     func setupPlayer() {
         self.albumImageView.downloaded(from: selectedMusic?.album?.images?[0].url ?? "")
@@ -148,6 +150,12 @@ class HomeViewController: UIViewController {
         
     }
     
+    func reloadSizeForPlaylist(count: Int) {
+        self.numberOfCellsPlaylist = count
+        self.fixHeight = CGFloat(140 + self.numberOfCellsPlaylist * 36)
+    }
+
+    
     @objc func didTapPlayer() {
         if let music = selectedMusic {
             let vc = PlayerModalViewController(music: music)
@@ -165,11 +173,18 @@ class HomeViewController: UIViewController {
     
     @IBAction func didTapPlusButton(_ sender: Any) {
     }
+    
+    func reloadForMusic(music: MusicItem, row: Int) {
+        self.selectedMusic = music
+        self.selectedIndex = row
+        self.postTableView.reloadData()
+        setupPlayer()
+    }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.getNumberOfRows() + 1
+        return viewModel.getPlaylistNumberOfRows() + 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -181,9 +196,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 //            return 0
 //            switch viewModel.getCellTypeForRow(index: indexPath.row - 1) {
 //            case .music:
-                return 90
+//                return 90
 //            case .playlist:
-//                return 140
+            if let openedRow = openedRow, indexPath == openedRow {
+                return 400
+            }
+            return 140
+
 //            }
         }
     }
@@ -195,16 +214,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             shareCell.delegate = self
             return shareCell
         } else {
-            let musicCell = self.postTableView.dequeueReusableCell(withIdentifier: MUSIC_CELL, for: indexPath) as! MusicTableViewCell
-            musicCell.setup(music: self.viewModel.getMusicForRow(index: indexPath.row - 1), isSelected: selectedIndex == indexPath.row)
-            return musicCell
-//            let playlistCell = self.postTableView.dequeueReusableCell(withIdentifier: PLAYLIST_CELL, for: indexPath) as! PlaylistTableViewCell
-//            playlistCell.delegate = self
-//            playlistCell.setup(indexPath: indexPath, height: fixHeight, isOpen: self.openedRow == indexPath)
-//            //        playlistCell.layoutSubviews()
-//            //        playlistCell.layoutIfNeeded()
-//            playlistCell.selectionStyle = .none
-//            return playlistCell
+//            let musicCell = self.postTableView.dequeueReusableCell(withIdentifier: MUSIC_CELL, for: indexPath) as! MusicTableViewCell
+//            musicCell.setup(music: self.viewModel.getMusicForRow(index: indexPath.row - 1), isSelected: selectedIndex == indexPath.row)
+//            return musicCell
+            let playlistCell = self.postTableView.dequeueReusableCell(withIdentifier: PLAYLIST_CELL, for: indexPath) as! PlaylistTableViewCell
+            playlistCell.delegate = self
+//            let index = self.viewModel.playlistTrackResponse.index(forKey: indexPath.row) ?? Dictionary<Int, PlaylistTracksResponse>.firs
+            let playlist: PlaylistTracksResponse? = self.viewModel.playlistTrackResponse[indexPath.row - 1]
+            playlistCell.setup(tracks: playlist, item: self.viewModel.getPlaylistForRow(index: indexPath.row - 1), indexPath: indexPath, height: fixHeight ?? 0, isOpen: self.openedRow == indexPath, isSelected: self.selectedIndex == indexPath.row, selectedRow: self.selectedIndexForPlaylist)
+            //        playlistCell.layoutSubviews()
+            //        playlistCell.layoutIfNeeded()
+            playlistCell.selectionStyle = .none
+            return playlistCell
         }
     }
     
@@ -215,13 +236,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 //            self.postTableView.reloadData()
 //            setupPlayer()
 //        }
-        if indexPath.row != 0 {
-            self.selectedMusic = self.viewModel.getMusicForRow(index: indexPath.row - 1)
-            self.selectedIndex = indexPath.row
-            self.postTableView.reloadData()
-            setupPlayer()
-        }
         
+        if indexPath.row != 0, let _ = tableView.cellForRow(at: indexPath) as? MusicTableViewCell {
+            self.reloadForMusic(music: self.viewModel.getMusicForRow(index: indexPath.row - 1), row: indexPath.row - 1)
+        }
     }
 }
 
@@ -243,9 +261,33 @@ extension HomeViewController: ShareTableViewCellDelegate {
 }
 
 extension HomeViewController: PlaylistTableViewCellDelegate {
+    func didSelectMusic(indexPath: IndexPath, music: PlaylistTracksItem) {
+        if let track = music.track {
+            self.reloadForMusic(music: track, row: indexPath.row)
+        }
+    }
+    
     func didTapPlaylist(indexPath: IndexPath) {
+        self.selectedIndex = indexPath.row
+        if viewModel.playlistTrackResponse[indexPath.row - 1] == nil {
+            self.showLoader()
+            self.viewModel.getPlaylist(forIndex: indexPath.row - 1, forId: self.viewModel.getPlaylistForRow(index: indexPath.row - 1).id ?? "", success: {
+                self.hideLoader()
+                self.reloadSizeForPlaylist(count: self.viewModel.playlistTrackResponse[indexPath.row]?.items?.count ?? 0)
+                self.setupOpen(indexPath: indexPath)
+            }) { (error) in
+                self.hideLoader()
+                self.showErrorAlert(message: error.localizedDescription)
+            }
+        } else {
+            self.setupOpen(indexPath: indexPath)
+            
+        }
+    }
+    
+    func setupOpen(indexPath: IndexPath) {
         if self.openedRow == indexPath {
-            openedRow = nil
+            self.openedRow = nil
         } else {
             self.openedRow = indexPath
         }

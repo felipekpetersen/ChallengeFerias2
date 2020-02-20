@@ -20,6 +20,7 @@ class HomeViewModel {
     var recentlyPlayed = RecentlyPlayed()
     var topResponse = ToptracksResponse()
     var playlistResponse = PlaylistResponse()
+    var playlistTrackResponse = [Int:PlaylistTracksResponse]()
     
     func tryReconnect(success: @escaping () -> (), erro: @escaping (Error) -> ()) {
         var params = Parameters()
@@ -89,6 +90,22 @@ class HomeViewModel {
         }
     }
     
+    func getPlaylist(forIndex: Int, forId: String, success: @escaping () -> (), erro: @escaping (Error) -> ()) {
+        var params = Parameters()
+        params = ["auth" : SpotifySingleton.shared().getAccessToken(), "playlist_id": forId]
+        Network.shared.request(MusicRouter.getTracksPlaylist, parameters: params, model: PlaylistTracksResponse.self, encoding: URLEncoding.queryString) { result in
+            
+            switch result {
+            case .sucess(let list):
+                self.playlistTrackResponse = [forIndex:list]
+                success()
+                break
+            case .failure(let error): erro(error)
+                break
+            }
+        }
+    }
+    
     func getTop(success: @escaping () -> (), erro: @escaping (Error) -> ()) {
         var params = Parameters()
         params = ["auth" : SpotifySingleton.shared().getAccessToken()]
@@ -148,6 +165,15 @@ class HomeViewModel {
     
     func getPlaylists() -> [MusicItem] {
         return playlistResponse.items ?? [MusicItem]()
+    }
+    
+    //MARK:-Deletar
+    func getPlaylistForRow(index: Int) -> MusicItem {
+        return playlistResponse.items?[index] ?? MusicItem()
+    }
+    
+    func getPlaylistNumberOfRows() -> Int {
+        return playlistResponse.items?.count ?? 0
     }
     
 }

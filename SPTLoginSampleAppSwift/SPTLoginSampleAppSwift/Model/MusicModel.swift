@@ -8,6 +8,112 @@
 
 import Foundation
 
+// MARK: - PlaylistTracksResponse
+struct PlaylistTracksResponse: Codable {
+    var href: String?
+    var items: [PlaylistTracksItem]?
+    var limit: Int?
+    var next: String?
+    var offset: Int?
+    var previous: String?
+    var total: Int?
+}
+
+// MARK: - Item
+struct PlaylistTracksItem: Codable {
+    var addedAt: Date?
+    var addedBy: PlaylistTracksAddedBy?
+    var isLocal: Bool?
+    var track: MusicItem?
+
+    enum CodingKeys: String, CodingKey {
+        case addedAt
+        case addedBy
+        case isLocal
+        case track
+    }
+}
+
+// MARK: - AddedBy
+struct PlaylistTracksAddedBy: Codable {
+    var externalUrls: ExternalUrls?
+    var href: String?
+    var id, type, uri, name: String?
+
+    enum CodingKeys: String, CodingKey {
+        case externalUrls
+        case href, id, type, uri, name
+    }
+}
+
+// MARK: - ExternalUrls
+//struct ExternalUrls: Codable {
+//    var spotify: String?
+//}
+
+// MARK: - Track
+//struct MusicItem: Codable {
+//    var album: PlaylistTracksAlbum?
+//    var artists: [PlaylistTracksAddedBy]?
+//    var availableMarkets: [String]?
+//    var discNumber, durationMS: Int?
+//    var explicit: Bool?
+//    var externalIDS: PlaylistTracksExternalIDS?
+//    var externalUrls: ExternalUrls?
+//    var href: String?
+//    var id, name: String?
+//    var popularity: Int?
+//    var previewURL: String?
+//    var trackNumber: Int?
+//    var type, uri: String?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case album, artists
+//        case availableMarkets
+//        case discNumber
+//        case durationMS
+//        case explicit
+//        case externalIDS
+//        case externalUrls
+//        case href, id, name, popularity
+//        case previewURL
+//        case trackNumber
+//        case type, uri
+//    }
+//}
+
+// MARK: - Album
+struct PlaylistTracksAlbum: Codable {
+    var albumType: String?
+    var artists: [PlaylistTracksAddedBy]?
+    var availableMarkets: [String]?
+    var externalUrls: ExternalUrls?
+    var href: String?
+    var id: String?
+    var images: [Image]?
+    var name, type, uri: String?
+
+    enum CodingKeys: String, CodingKey {
+        case albumType
+        case artists
+        case availableMarkets
+        case externalUrls
+        case href, id, images, name, type, uri
+    }
+}
+
+// MARK: - Image
+//struct Image: Codable {
+//    var height: Int?
+//    var url: String?
+//    var width: Int?
+//}
+
+// MARK: - ExternalIDS
+struct PlaylistTracksExternalIDS: Codable {
+    var isrc: String?
+}
+
 
 // MARK: - PlaylistResponse
 struct PlaylistResponse: Codable {
@@ -90,12 +196,13 @@ struct Tracks: Codable {
 enum ItemType: String, Codable {
     case playlist = "playlist"
 }
+
 // MARK: - Toptracks
 struct ToptracksResponse: Codable {
     var items: [MusicItem]?
     var total, limit, offset: Int?
     var href: String?
-    var previous: JSONNull?
+    var previous: String?
     var next: String?
 }
 
@@ -137,7 +244,7 @@ struct MusicItem: Codable {
         case trackNumber
         case type, uri
         case images
-//        case owner, images
+        case owner
 //        case colaborative
     }
 }
@@ -307,9 +414,6 @@ struct Artist: Codable {
     }
 }
 // MARK: - End RecentlyPlayed
-
-
-
 
 // MARK: - Encode/decode helpers
 

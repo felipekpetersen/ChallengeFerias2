@@ -14,6 +14,7 @@ enum MusicRouter: RouterProtocol {
     case getRecentlyPlayed
     case getTopTracks
     case putPlay
+    case getTracksPlaylist
     
     var path: String {
         switch self {
@@ -21,12 +22,13 @@ enum MusicRouter: RouterProtocol {
         case .getRecentlyPlayed: return GET_RECENTLY_PLAYED
         case .getTopTracks: return GET_TOP_TRACKS
         case .putPlay: return PUT_PLAY
+        case .getTracksPlaylist: return GET_PLAYLIST_TRACKS
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .getUserPlaylists, .getRecentlyPlayed, .getTopTracks: return .get
+        case .getUserPlaylists, .getRecentlyPlayed, .getTopTracks, .getTracksPlaylist: return .get
         case .putPlay: return .put
         }
     }
