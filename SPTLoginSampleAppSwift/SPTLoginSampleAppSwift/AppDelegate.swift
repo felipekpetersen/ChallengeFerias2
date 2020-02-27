@@ -1,5 +1,6 @@
 
 import UIKit
+import CloudKit
 
 @UIApplicationMain
 //class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
@@ -29,6 +30,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = rootViewController
             window?.makeKeyAndVisible()
         }
+//        let container = CKContainer.default()
+//        let publicDatabase = container.publicCloudDatabase
+//        let privateDatabase = container.privateCloudDatabase
+//        
+//        let record = CKRecord(recordType: "UserType")
+//        record.setValue("teste", forKey: "id")
+//        publicDatabase.save(record) { (record, err) in
+//            print(record)
+//            print(err)
+//        }
+        
         return true
     }
 

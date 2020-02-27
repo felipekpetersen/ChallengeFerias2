@@ -41,13 +41,14 @@ class HomeViewController: UIViewController {
         self.showLoader()
         viewModel.tryReconnect(success: {
             self.hideLoader()
-            if let _ = UserDefaults.standard.string(forKey: USER_NAME), let _ = UserDefaults.standard.string(forKey: USER_IMAGE_URL) {
+            self.getMe()
+//            if let _ = UserDefaults.standard.string(forKey: USER_NAME), let _ = UserDefaults.standard.string(forKey: USER_IMAGE_URL) {
+////                self.getPlaylists()
+//                self.getTop()
 //                self.getPlaylists()
-                self.getTop()
-                self.getPlaylists()
-            } else {
-                self.getMe()
-            }
+//            } else {
+//                self.getMe()
+//            }
         }) { (error) in
             self.hideLoader()
             let mainView = SignInViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller

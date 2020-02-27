@@ -21,6 +21,7 @@ class HomeViewModel {
     var topResponse = ToptracksResponse()
     var playlistResponse = PlaylistResponse()
     var playlistTrackResponse = [Int:PlaylistTracksResponse]()
+//    var user = UserResponse()
     
     func tryReconnect(success: @escaping () -> (), erro: @escaping (Error) -> ()) {
         var params = Parameters()
@@ -50,6 +51,9 @@ class HomeViewModel {
             case .sucess(let list):
                 UserDefaults.standard.set(list.display_name, forKey: USER_NAME)
                 UserDefaults.standard.set(list.images?[0].url, forKey: USER_IMAGE_URL)
+                DataController.shared().checkUser(list) { (result) in
+                    print("meu deus")
+                }
                 success()
                 break
             case .failure(let error): erro(error)
