@@ -56,14 +56,15 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func getMe() {
+    func getMe() {        
         self.showLoader()
         viewModel.getMe(success: {
             self.hideLoader()
             self.getTop()
             self.getPlaylists()
+            
 //            self.getRecentlyPlayed()
-        }) { (error) in
+        }) { error in
 //            self.showErrorAlert(message: error.localizedDescription)
         }
     }

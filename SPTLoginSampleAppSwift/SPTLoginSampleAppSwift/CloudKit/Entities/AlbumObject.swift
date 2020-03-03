@@ -13,11 +13,11 @@ public class AlbumObject: NSObject, EntityObject {
     
     public static let recordType = "Album"
     public private(set) var record: CKRecord
-    public private(set) var artists: ReferenceList<ArtistObject>
-    public private(set) var external_urls: ReferenceField<ExternalUrlsResponseObject>
+    public private(set) var artists: ReferenceList<ArtistObject>?
+    public private(set) var external_urls: ReferenceField<ExternalUrlsResponseObject>?
     public private(set) var href: DataProperty<String?>
     public private(set) var id: DataProperty<String?>
-    public private(set) var images: ReferenceList<ImageObject>
+    public private(set) var images: ReferenceList<ImageObject>?
     public private(set) var name: DataProperty<String?>
     public private(set) var totalTracks: DataProperty<Int?>
     public private(set) var uri: DataProperty<String?>

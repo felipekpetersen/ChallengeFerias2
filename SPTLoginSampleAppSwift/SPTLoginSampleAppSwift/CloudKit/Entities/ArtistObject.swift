@@ -13,7 +13,7 @@ public class ArtistObject: NSObject, EntityObject {
     
     public static let recordType = "Artist"
     public private(set) var record: CKRecord
-    public private(set) var external_urls: ReferenceField<ExternalUrlsResponseObject>
+    public private(set) var external_urls: ReferenceField<ExternalUrlsResponseObject>?
     public private(set) var href: DataProperty<String?>
     public private(set) var id: DataProperty<String?>
     public private(set) var name: DataProperty<String?>

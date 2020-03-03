@@ -42,7 +42,7 @@ class ShareModalViewController: UIViewController {
     convenience init(item: MusicItem?, recommended: [MusicItem], state: ShareModalViewControllerState) {
         self.init()
         self.sharingMusicItem = item
-        if state == .fromMusic {
+        if state == .fromMusic || state == .fromSearch {
             self.recommendedMusic = recommended
         } else if state == .fromPlaylist {
             self.recommendedPlaylist = recommended
@@ -85,7 +85,8 @@ class ShareModalViewController: UIViewController {
     }
     
     @objc func didTapShare() {
-        
+        DataController.shared().createSimplePost(isMusic: true, item: sharingSearchItem ?? MusicItem())
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func didTapDismiss() {

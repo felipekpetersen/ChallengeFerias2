@@ -22,6 +22,7 @@ class HomeViewModel {
     var playlistResponse = PlaylistResponse()
     var playlistTrackResponse = [Int:PlaylistTracksResponse]()
 //    var user = UserResponse()
+    var posts: [SimplePostObject]?
     
     func tryReconnect(success: @escaping () -> (), erro: @escaping (Error) -> ()) {
         var params = Parameters()
@@ -52,7 +53,13 @@ class HomeViewModel {
                 UserDefaults.standard.set(list.display_name, forKey: USER_NAME)
                 UserDefaults.standard.set(list.images?[0].url, forKey: USER_IMAGE_URL)
                 DataController.shared().checkUser(list) { (result) in
-                    print("meu deus")
+//                    self.setNewFollowingTeste()
+                    DataController.shared().getPosts(response: { posts in
+                        if let posts = posts {
+                            self.posts = posts
+                            
+                        }
+                    })
                 }
                 success()
                 break
@@ -60,6 +67,11 @@ class HomeViewModel {
                 break
             }
         }
+    }
+    
+    
+    func setNewFollowingTeste() {
+        DataController.shared().setNewFollowing(followingId: "11146741708")
     }
     
     func getPlaylists(success: @escaping () -> (), erro: @escaping (Error) -> ()) {

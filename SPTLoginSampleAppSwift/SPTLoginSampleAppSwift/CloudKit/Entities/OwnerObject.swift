@@ -14,7 +14,7 @@ public class OwnerObject: NSObject, EntityObject {
     public static let recordType = "Owner"
     public private(set) var record: CKRecord
     public private(set) var display_name: DataProperty<String?>
-    public private(set) var external_urls: ReferenceField<ExternalUrlsResponseObject>
+    public private(set) var external_urls: ReferenceField<ExternalUrlsResponseObject>?
     public private(set) var href: DataProperty<String?>
     public private(set) var id: DataProperty<String?>
     public private(set) var uri: DataProperty<String?>

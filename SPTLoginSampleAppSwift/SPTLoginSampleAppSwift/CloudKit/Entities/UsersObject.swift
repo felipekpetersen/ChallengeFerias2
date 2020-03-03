@@ -22,7 +22,7 @@ public class UsersObject: NSObject, EntityObject {
     public private(set) var following: ReferenceList<UsersObject>
     public private(set) var href: DataProperty<String>
     public private(set) var id: DataProperty<String>
-    public private(set) var posts: ReferenceList<PostObject>
+    public private(set) var posts: ReferenceList<SimplePostObject>
     public private(set) var product: DataProperty<String>
     public private(set) var type: DataProperty<String>
     public private(set) var uri: DataProperty<String>

@@ -13,14 +13,14 @@ public class MusicItemObject: NSObject, EntityObject {
     
     public static let recordType = "MusicItem"
     public private(set) var record: CKRecord
-    public private(set) var album: ReferenceField<AlbumObject>
-    public private(set) var artists: ReferenceList<ArtistObject>
-    public private(set) var external_urls: ReferenceField<ExternalUrlsResponseObject>
+    public private(set) var album: ReferenceField<AlbumObject>?
+    public private(set) var artists: ReferenceList<ArtistObject>?
+    public private(set) var external_urls: ReferenceField<ExternalUrlsResponseObject>?
     public private(set) var href: DataProperty<String?>
     public private(set) var id: DataProperty<String?>
-    public private(set) var images: ReferenceList<ImageObject>
+    public private(set) var images: ReferenceList<ImageObject>?
     public private(set) var name: DataProperty<String?>
-    public private(set) var owner: ReferenceField<OwnerObject>
+    public private(set) var owner: ReferenceField<OwnerObject>?
     public private(set) var previewUrl: DataProperty<String?>
     public private(set) var type: DataProperty<String?>
     public private(set) var uri: DataProperty<String?>
@@ -42,3 +42,22 @@ public class MusicItemObject: NSObject, EntityObject {
     }
 
 }
+
+public class SimpleMusicObject: NSObject, EntityObject {
+    
+    public static let recordType = "SimplePost"
+    public private(set) var record: CKRecord
+    public private(set) var imageUrl: DataProperty<String?>
+    public private(set) var title: DataProperty<String?>
+    public private(set) var uri: DataProperty<String?>
+
+    public init(record: CKRecord) {
+        self.record = record
+        self.imageUrl = DataProperty(record: record, key: "imageUrl")
+        self.title = DataProperty(record: record, key: "title")
+        self.uri = DataProperty(record: record, key: "uri")
+
+        super.init()
+    }
+}
+

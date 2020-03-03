@@ -13,7 +13,7 @@ public class ExternalUrlsResponseObject: NSObject, EntityObject {
     
     public static let recordType = "ExternalUrlsResponse"
     public private(set) var record: CKRecord
-    public private(set) var spotify: DataProperty<String>
+    public private(set) var spotify: DataProperty<String?>
 
     public init(record: CKRecord) {
            self.record = record
