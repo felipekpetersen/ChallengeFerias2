@@ -54,12 +54,12 @@ class HomeViewModel {
                 UserDefaults.standard.set(list.images?[0].url, forKey: USER_IMAGE_URL)
                 DataController.shared().checkUser(list) { (result) in
 //                    self.setNewFollowingTeste()
-                    DataController.shared().getPosts(response: { posts in
-                        if let posts = posts {
-                            self.posts = posts
-                            
-                        }
-                    })
+//                    DataController.shared().getPosts(response: { posts in
+//                        if let posts = posts {
+//                            self.posts = posts
+//
+//                        }
+//                    })
                 }
                 success()
                 break

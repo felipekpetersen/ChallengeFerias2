@@ -85,7 +85,7 @@ class ShareModalViewController: UIViewController {
     }
     
     @objc func didTapShare() {
-        DataController.shared().createSimplePost(isMusic: true, item: sharingSearchItem ?? MusicItem())
+        DataController.shared().createSimplePost(isMusic: true, item: sharingSearchItem ?? MusicItem(), playlistMusics: nil)
         self.dismiss(animated: true, completion: nil)
     }
     

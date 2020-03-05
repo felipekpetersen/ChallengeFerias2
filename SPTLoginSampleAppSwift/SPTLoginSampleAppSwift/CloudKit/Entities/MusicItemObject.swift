@@ -50,12 +50,14 @@ public class SimpleMusicObject: NSObject, EntityObject {
     public private(set) var imageUrl: DataProperty<String?>
     public private(set) var title: DataProperty<String?>
     public private(set) var uri: DataProperty<String?>
+    public private(set) var previewUrl: DataProperty<String?>
 
     public init(record: CKRecord) {
         self.record = record
         self.imageUrl = DataProperty(record: record, key: "imageUrl")
         self.title = DataProperty(record: record, key: "title")
         self.uri = DataProperty(record: record, key: "uri")
+        self.previewUrl = DataProperty(record: record, key: "previewUrl")
 
         super.init()
     }

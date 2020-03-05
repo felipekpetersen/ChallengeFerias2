@@ -285,6 +285,8 @@ public class DataController {
                 if let name = item.name { newMusic.title.value = name }
                 if let uri = item.uri { newMusic.uri.value = uri }
                 if let url = item.images?[0].url { newMusic.imageUrl.value = url }
+                if let preview = item.previewURL { newMusic.previewUrl.value = preview }
+
                 newPost.simpleMusics.append(newMusic, action: .none)
                 self.recordsToSave.append(newMusic)
             
@@ -294,6 +296,8 @@ public class DataController {
                         if let name = music.track?.name { newMusic.title.value = name }
                         if let uri = music.track?.uri { newMusic.uri.value = uri }
                         if let url = music.track?.images?[0].url { newMusic.imageUrl.value = url }
+                        if let preview = music.track?.previewURL { newMusic.previewUrl.value = preview }
+
                         newPost.simpleMusics.append(newMusic, action: .none)
                         self.recordsToSave.append(newMusic)
                     }

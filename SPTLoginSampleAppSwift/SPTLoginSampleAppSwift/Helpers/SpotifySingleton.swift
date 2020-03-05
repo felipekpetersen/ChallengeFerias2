@@ -79,6 +79,7 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
     
     func observerDidEstablish(vc:UIViewController, function: Selector ) {
         NotificationCenter.default.addObserver(vc, selector: function, name: .didEstablish, object: nil)
+//        NotificationCenter.default.addObserver(forName: .didEstablish, object: <#T##Any?#>, queue: OperationQueue.main, object: )
     }
     
     func observerDidFail(vc:UIViewController, function: Selector ) {
@@ -169,8 +170,8 @@ class SpotifySingleton: NSObject, SPTSessionManagerDelegate, SPTAppRemoteDelegat
         print("conectou nessa budega")
         appRemote.connectionParameters.accessToken = session.accessToken
         UserDefaults.standard.set(session.refreshToken, forKey: REFRESH)
+        NotificationCenter.default.post(name: .didEstablish, object: nil)
         appRemote.connect()
-        
     }
     
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {

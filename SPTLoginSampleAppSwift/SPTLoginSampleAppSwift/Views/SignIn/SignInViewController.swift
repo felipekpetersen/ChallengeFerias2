@@ -60,15 +60,19 @@ class SignInViewController: UIViewController {
     }
     
     @objc func didStablish() {
-        self.hideLoader()
-        print(SpotifySingleton.shared().getAccessToken())
-        print(SpotifySingleton.shared().getRefreshToken())
-        enterApp()
+        DispatchQueue.main.async {
+            self.hideLoader()
+            print(SpotifySingleton.shared().getAccessToken())
+            print(SpotifySingleton.shared().getRefreshToken())
+            self.enterApp()
+        }
     }
     
     @objc func didFail() {
-        self.hideLoader()
-        self.showErrorAlert(message: "Tente novamente")
+        DispatchQueue.main.async {
+            self.hideLoader()
+            self.showErrorAlert(message: "Tente novamente")
+        }
     }
     
     func enterApp() {
