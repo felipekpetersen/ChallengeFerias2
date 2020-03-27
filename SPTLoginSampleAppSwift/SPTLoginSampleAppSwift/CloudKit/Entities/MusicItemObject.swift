@@ -45,18 +45,20 @@ public class MusicItemObject: NSObject, EntityObject {
 
 public class SimpleMusicObject: NSObject, EntityObject {
     
-    public static let recordType = "SimplePost"
+    public static let recordType = "SimpleMusic"
     public private(set) var record: CKRecord
     public private(set) var imageUrl: DataProperty<String?>
     public private(set) var title: DataProperty<String?>
     public private(set) var uri: DataProperty<String?>
     public private(set) var previewUrl: DataProperty<String?>
+    public private(set) var artistName: DataProperty<String?>
 
     public init(record: CKRecord) {
         self.record = record
         self.imageUrl = DataProperty(record: record, key: "imageUrl")
         self.title = DataProperty(record: record, key: "title")
         self.uri = DataProperty(record: record, key: "uri")
+        self.artistName = DataProperty(record: record, key: "artistName")
         self.previewUrl = DataProperty(record: record, key: "previewUrl")
 
         super.init()

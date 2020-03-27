@@ -41,22 +41,24 @@ class ShareModalViewController: UIViewController {
     
     convenience init(item: MusicItem?, recommended: [MusicItem], state: ShareModalViewControllerState) {
         self.init()
-        self.sharingMusicItem = item
+        
         if state == .fromMusic || state == .fromSearch {
+            self.sharingMusicItem = item
             self.recommendedMusic = recommended
         } else if state == .fromPlaylist {
+            self.sharingPlaylistItem = item
             self.recommendedPlaylist = recommended
         }
         self.state = state
     }
     
-//    convenience init(item playlist: MusicItem?, recommended: [MusicItem], state: ShareModalViewControllerState) {
-//        self.init()
-//        self.sharingPlaylistItem = playlist
-//        self.recommendedPlaylist = recommended
-//        self.state = state 
-//    }
-
+    //    convenience init(item playlist: MusicItem?, recommended: [MusicItem], state: ShareModalViewControllerState) {
+    //        self.init()
+    //        self.sharingPlaylistItem = playlist
+    //        self.recommendedPlaylist = recommended
+    //        self.state = state
+    //    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -85,8 +87,22 @@ class ShareModalViewController: UIViewController {
     }
     
     @objc func didTapShare() {
-        DataController.shared().createSimplePost(isMusic: true, item: sharingSearchItem ?? MusicItem(), playlistMusics: nil)
-        self.dismiss(animated: true, completion: nil)
+        if let sharingSearchItem = sharingSearchItem {
+            DataController.shared().createSimplePost(isMusic: true, item: sharingSearchItem, playlistMusics: nil)
+            self.dismiss(animated: true, completion: nil)
+        } else if let sharingPlaylistItem = sharingPlaylistItem, let id = sharingPlaylistItem.id {
+            self.viewModel.getPlaylist(forId: id, success: {
+                DataController.shared().createSimplePost(isMusic: false, item: sharingPlaylistItem, playlistMusics: self.viewModel.playlistTrackResponse.items)
+                self.dismiss(animated: true, completion: nil)
+                
+            }) { (error) in
+                print(error)
+            }
+        } else if let sharingMusicItem = sharingMusicItem {
+            DataController.shared().createSimplePost(isMusic: true, item: sharingMusicItem, playlistMusics: nil)
+            self.dismiss(animated: true, completion: nil)
+            
+        }
     }
     
     @objc func didTapDismiss() {
@@ -104,11 +120,11 @@ class ShareModalViewController: UIViewController {
             self.musicNameLabel.text = item.name
             self.artistNameLabel.text = item.owner?.display_name
             self.albumImageView.downloaded(from: item.album?.images?[0].url ?? item.images?[0].url ?? "")
-        } else if let item = sharingSearchItem{
-            self.musicView.isHidden = false
-            self.musicNameLabel.text = item.name
-            self.artistNameLabel.text = item.artists?[0].name
-            self.albumImageView.downloaded(from: item.album?.images?[0].url ?? item.images?[0].url ?? "")
+//        } else if let item = sharingSearchItem{
+//            self.musicView.isHidden = false
+//            self.musicNameLabel.text = item.name
+//            self.artistNameLabel.text = item.artists?[0].name
+//            self.albumImageView.downloaded(from: item.album?.images?[0].url ?? item.images?[0].url ?? "")
         }
     }
 }
@@ -163,7 +179,7 @@ extension ShareModalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sharingMusicItem = nil
         self.sharingPlaylistItem = nil
-        self.sharingSearchItem = nil
+//        self.sharingSearchItem = nil
         
         switch state {
         case .fromMusic, .fromSearch:
@@ -171,7 +187,9 @@ extension ShareModalViewController: UITableViewDelegate, UITableViewDataSource {
         case .fromPlaylist:
             self.sharingPlaylistItem = recommendedPlaylist[indexPath.row]
         case .didSearch:
-            self.sharingSearchItem = self.viewModel.getSearchForRow(index: indexPath.row)
+//            self.sharingSearchItem = self.viewModel.getSearchForRow(index: indexPath.row)
+            self.sharingMusicItem = self.viewModel.getSearchForRow(index: indexPath.row)
+
         case .none:
             break
         }

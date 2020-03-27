@@ -221,7 +221,7 @@ struct MusicItem: Codable {
     var isLocal: Bool?
     var name: String?
     var popularity: Int?
-    var previewURL: String?
+    var preview_url: String?
     var trackNumber: Int?
     var type: TopItemType?
     var uri: String?
@@ -240,7 +240,7 @@ struct MusicItem: Codable {
         case href, id
         case isLocal
         case name, popularity
-        case previewURL
+        case preview_url
         case trackNumber
         case type, uri
         case images

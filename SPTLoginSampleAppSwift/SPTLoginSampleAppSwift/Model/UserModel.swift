@@ -27,6 +27,8 @@ struct UserResponse: Decodable {
     let followers: FollowersResponse?
     let href: String?
     let id: String?
+    let uuid: String?
+    let password: String?
     let images: [ImageResponse]?
     let product, type, uri: String?
 }

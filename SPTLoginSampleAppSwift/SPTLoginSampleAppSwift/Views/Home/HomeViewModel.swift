@@ -69,6 +69,12 @@ class HomeViewModel {
         }
     }
     
+    func getPosts() {
+        DataController.shared().getPosts { (response) in
+            self.posts = response
+        }
+    }
+    
     
     func setNewFollowingTeste() {
         DataController.shared().setNewFollowing(followingId: "11146741708")
@@ -190,6 +196,15 @@ class HomeViewModel {
     
     func getPlaylistNumberOfRows() -> Int {
         return playlistResponse.items?.count ?? 0
+    }
+    
+    
+    func getPostForRow(index: Int) -> SimplePostObject? {
+        return posts?[index]
+    }
+    
+    func getNumberOfPosts() -> Int {
+        return posts?.count ?? 0
     }
     
 }

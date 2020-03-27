@@ -26,6 +26,8 @@ public class UsersObject: NSObject, EntityObject {
     public private(set) var product: DataProperty<String>
     public private(set) var type: DataProperty<String>
     public private(set) var uri: DataProperty<String>
+    public private(set) var uuid: DataProperty<String?>
+    public private(set) var password: DataProperty<String?>
     
     public init(record: CKRecord) {
         self.record = record
@@ -42,6 +44,8 @@ public class UsersObject: NSObject, EntityObject {
         self.type = DataProperty(record: record, key: "type")
         self.uri = DataProperty(record: record, key: "uri")
         self.images = ReferenceField(record: record, key: "images", action: .deleteSelf)
+        self.uuid = DataProperty(record: record, key: "uuid")
+        self.password = DataProperty(record: record, key: "password")
         super.init()
     }
 

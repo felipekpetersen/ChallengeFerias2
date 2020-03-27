@@ -269,8 +269,6 @@ public class DataController {
             
             let record = CKRecord(recordType: SimplePostObject.recordType)
             let newPost = SimplePostObject(record: record)
-            let recordMusic = CKRecord(recordType: SimpleMusicObject.recordType)
-            let newMusic = SimpleMusicObject(record: recordMusic)
            
             newPost.isMusic.value = isMusic ? 1 : 0
             if let url = item.images?[0].url { newPost.imageUrl.value = url }
@@ -281,11 +279,14 @@ public class DataController {
             newPost.sharedBy.value = self.userObject
             
             if isMusic {
-                
+                let recordMusic = CKRecord(recordType: SimpleMusicObject.recordType)
+                let newMusic = SimpleMusicObject(record: recordMusic)
                 if let name = item.name { newMusic.title.value = name }
                 if let uri = item.uri { newMusic.uri.value = uri }
-                if let url = item.images?[0].url { newMusic.imageUrl.value = url }
-                if let preview = item.previewURL { newMusic.previewUrl.value = preview }
+                if let url = item.album?.images?[0].url { newMusic.imageUrl.value = url }
+                if let artistName = item.artists?[0].name { newMusic.artistName.value = artistName }
+                if let preview = item.preview_url { newMusic.previewUrl.value = preview }
+//                if let id = item.id { newMusic.id.value = id }
 
                 newPost.simpleMusics.append(newMusic, action: .none)
                 self.recordsToSave.append(newMusic)
@@ -293,10 +294,13 @@ public class DataController {
             } else {
                 if let musics = playlistMusics {
                     for music in musics {
+                        let recordMusic = CKRecord(recordType: SimpleMusicObject.recordType)
+                        let newMusic = SimpleMusicObject(record: recordMusic)
                         if let name = music.track?.name { newMusic.title.value = name }
                         if let uri = music.track?.uri { newMusic.uri.value = uri }
-                        if let url = music.track?.images?[0].url { newMusic.imageUrl.value = url }
-                        if let preview = music.track?.previewURL { newMusic.previewUrl.value = preview }
+                        if let url = music.track?.album?.images?[0].url { newMusic.imageUrl.value = url }
+                        if let artistName = item.artists?[0].name { newMusic.artistName.value = artistName }
+                        if let preview = music.track?.preview_url { newMusic.previewUrl.value = preview }
 
                         newPost.simpleMusics.append(newMusic, action: .none)
                         self.recordsToSave.append(newMusic)

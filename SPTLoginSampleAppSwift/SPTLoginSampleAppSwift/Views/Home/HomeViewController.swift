@@ -216,18 +216,29 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             shareCell.delegate = self
             return shareCell
         } else {
+            if let post = self.viewModel.getPostForRow(index: indexPath.row) {
+                if (post.isMusic.value ?? 0) as Bool {
+                    let musicCell = self.postTableView.dequeueReusableCell(withIdentifier: MUSIC_CELL, for: indexPath) as! MusicTableViewCell
+                    musicCell.setup(music: post, isSelected: selectedIndex == indexPath.row)
+                    return musicCell
+                } else {
+                    let playlistCell = self.postTableView.dequeueReusableCell(withIdentifier: PLAYLIST_CELL, for: indexPath) as! PlaylistTableViewCell
+                    playlistCell.delegate = self
+                    //            let index = self.viewModel.playlistTrackResponse.index(forKey: indexPath.row) ?? Dictionary<Int, PlaylistTracksResponse>.firs
+                    let playlist: PlaylistTracksResponse? = self.viewModel.playlistTrackResponse[indexPath.row - 1]
+                    playlistCell.setup(tracks: playlist, item: self.viewModel.getPlaylistForRow(index: indexPath.row - 1), indexPath: indexPath, height: fixHeight ?? 0, isOpen: self.openedRow == indexPath, isSelected: self.selectedIndex == indexPath.row, selectedRow: self.selectedIndexForPlaylist)
+                    //        playlistCell.layoutSubviews()
+                    //        playlistCell.layoutIfNeeded()
+                    playlistCell.selectionStyle = .none
+                    return playlistCell
+                }
+            } else {
+                return UITableViewCell() 
+            }
 //            let musicCell = self.postTableView.dequeueReusableCell(withIdentifier: MUSIC_CELL, for: indexPath) as! MusicTableViewCell
 //            musicCell.setup(music: self.viewModel.getMusicForRow(index: indexPath.row - 1), isSelected: selectedIndex == indexPath.row)
 //            return musicCell
-            let playlistCell = self.postTableView.dequeueReusableCell(withIdentifier: PLAYLIST_CELL, for: indexPath) as! PlaylistTableViewCell
-            playlistCell.delegate = self
-//            let index = self.viewModel.playlistTrackResponse.index(forKey: indexPath.row) ?? Dictionary<Int, PlaylistTracksResponse>.firs
-            let playlist: PlaylistTracksResponse? = self.viewModel.playlistTrackResponse[indexPath.row - 1]
-            playlistCell.setup(tracks: playlist, item: self.viewModel.getPlaylistForRow(index: indexPath.row - 1), indexPath: indexPath, height: fixHeight ?? 0, isOpen: self.openedRow == indexPath, isSelected: self.selectedIndex == indexPath.row, selectedRow: self.selectedIndexForPlaylist)
-            //        playlistCell.layoutSubviews()
-            //        playlistCell.layoutIfNeeded()
-            playlistCell.selectionStyle = .none
-            return playlistCell
+            
         }
     }
     
