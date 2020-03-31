@@ -217,7 +217,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return shareCell
         } else {
             if let post = self.viewModel.getPostForRow(index: indexPath.row) {
-                if (post.isMusic.value ?? 0) as Bool {
+                if (post.isMusic.value ?? 0) == 1 {
                     let musicCell = self.postTableView.dequeueReusableCell(withIdentifier: MUSIC_CELL, for: indexPath) as! MusicTableViewCell
                     musicCell.setup(music: post, isSelected: selectedIndex == indexPath.row)
                     return musicCell

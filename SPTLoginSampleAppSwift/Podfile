@@ -6,6 +6,6 @@ target 'Synchs' do
   use_frameworks!
 
   # Pods for Synchs
-   pod 'Alamofire', '~> 5.0.0-rc.3'
-
+	pod 'Alamofire'
+  
 end

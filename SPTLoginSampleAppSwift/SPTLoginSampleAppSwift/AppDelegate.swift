@@ -1,6 +1,8 @@
 
 import UIKit
 import CloudKit
+//import UserNotifications
+
 
 @UIApplicationMain
 //class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
@@ -22,6 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
     }
     
+    
+    func subscribeToPushNotifications() {
+        
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if let _ = SpotifySingleton.shared().getRefreshToken() {
             enterApp()
@@ -30,6 +37,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = rootViewController
             window?.makeKeyAndVisible()
         }
+        
+        UNUserNotificationCenter.current().delegate = self
+
+        // Pede permissão para mandar notificações
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { authorized, error in
+          if authorized {
+            DispatchQueue.main.async(execute: {
+              application.registerForRemoteNotifications()
+            })
+          }
+        })
 //        let container = CKContainer.default()
 //        let publicDatabase = container.publicCloudDatabase
 //        let privateDatabase = container.privateCloudDatabase
@@ -43,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         SpotifySingleton.shared().sessionManager.application(app, open: url, options: options)
@@ -60,4 +79,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SpotifySingleton.shared().appRemote.connect()
         }
     }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate{
+    
+    // This function will be called when the app receive notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        // show the notification alert (banner), and with sound
+        completionHandler([.alert, .sound, .badge])
+    }
+    
+    // This function will be called right after user tap on the notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        // tell the app that we have finished processing the user’s action (eg: tap on notification banner) / response
+        completionHandler()
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let subscription = CKQuerySubscription(recordType: "UserType", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
+        let info = CKSubscription.NotificationInfo()
+//        info.titleLocalizationKey = "%1$@"
+//        info.titleLocalizationArgs = ["title"]
+        
+        // if you want to use multiple field combined for the title of push notification
+        // info.titleLocalizationKey = "%1$@ %2$@" // if want to add more, the format will be "%3$@", "%4$@" and so on
+        // info.titleLocalizationArgs = ["title", "subtitle"]
+        
+        // this will use the 'content' field in the Record type 'notifications' as the content of the push notification
+//        info.alertLocalizationKey = "%1$@"
+//        info.alertLocalizationArgs = ["content"]
+        info.alertBody = "isso é um aviso"
+        info.title = "isso é um titulo"
+        // increment the red number count on the top right corner of app icon
+        info.shouldBadge = true
+        
+        // use system default notification sound
+        info.soundName = "default"
+        
+        subscription.notificationInfo = info
+        CKContainer.default().publicCloudDatabase.save(subscription, completionHandler: { subscription, error in
+            if error == nil {
+                print("Subscription saved successfully")
+                // Subscription saved successfully
+            } else {
+                print("subscription Error: \(error)")
+                // Error occurred
+            }
+        })
+    }
+    
 }
